@@ -35,9 +35,9 @@ This checks JavaScript syntax, local routes and assets, fixture boundaries, inde
 
 ## Hosting status
 
-The repository is private. Public hosting has not been enabled.
+Public publication was approved on 2026-10-10. The repository and its source are public; the previews are hosted through GitHub Pages.
 
-A manual GitHub Pages deployment workflow is prepared at `.github/workflows/pages.yml`, with no automatic push trigger. Do not run it until publication and visibility are explicitly approved. GitHub Pages availability for private repositories depends on the account plan; [GitHub documents the supported plans](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages).
+The workflow at `.github/workflows/pages.yml` checks and publishes changes to `site/`, `tools/check.cjs` or the workflow when they are committed to `main`. You can also trigger it manually. Documentation-only commits do not redeploy. A failed check prevents the new deployment; check the repository's Actions tab before assuming an edit is live.
 
 The hosted entry point is `site/index.html`. All navigation uses relative routes and does not depend on Perplexity preview URLs. The remote Fontshare font is optional; browser fallback fonts keep the pages usable.
 

@@ -1,9 +1,15 @@
 name: Publish approved static previews
 
-# Prepared only. There is no automatic deployment on push.
-# Run manually only after explicit public-publication approval.
+# Public publication approved by the repository owner on 2026-10-10.
+# Only changes to the published site, checker or deployment workflow redeploy.
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - 'tools/check.cjs'
+      - '.github/workflows/pages.yml'
 
 permissions:
   contents: read

@@ -21,4 +21,4 @@ The migration preserves the earlier previews and makes their routes independent 
 
 ## Publication boundary
 
-The private repository can be edited without publishing the website. A manually triggered Pages workflow is prepared but not enabled or run. Public hosting is a separate approval and account-plan decision.
+Public source and GitHub Pages publication were explicitly approved by the owner on 2026-10-10. Site changes committed to `main` now trigger checks and deployment; documentation-only changes do not. This approval applies to the previews repository, not the released runtime or other repositories.
