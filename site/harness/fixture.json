@@ -1,0 +1,619 @@
+{
+  "schema": "scandoc-harness-source-fixture/1",
+  "source_revision": "56f072bef29003b4c730e6e7cf221ff87b801362",
+  "planar_points": [
+    [-0.9, -0.4, 0],
+    [0.75, 0.25, 0],
+    [-0.35, 0.8, 0],
+    [0.3, -0.75, 0],
+    [-0.8, 0.4, 0],
+    [0.9, -0.25, 0]
+  ],
+  "planar": {
+    "request": {
+      "schema": "touch-surface-pair/2",
+      "tap": {
+        "core": {
+          "adapter": "synthetic-read-only/1",
+          "revision": "core-0",
+          "root": "0000000000000000000000000000000000000000000000000000000000000000",
+          "session_scope": "session-A"
+        },
+        "origin": {
+          "adapter": "synthetic-contact/1",
+          "contact_id": "contact-0",
+          "session_scope": "session-A"
+        },
+        "scope": {
+          "cycle_id": 0,
+          "pair_id": "pair-A",
+          "session_scope": "session-A"
+        },
+        "state": {
+          "geometry_revision": "plane-0",
+          "group_policy": null,
+          "motion": {
+            "compatibility": "common-translating-plane/1",
+            "frame": {
+              "normal": [0.0, 0.0, 1.0],
+              "origin0": [0.0, 0.0, 0.0],
+              "origin1": [0.0, 0.0, 0.0],
+              "units": "declared-derived-unit"
+            },
+            "max_displacement": 200.0,
+            "previous_root": "0000000000000000000000000000000000000000000000000000000000000000",
+            "scale": 1.0,
+            "schema": "invariant-surface-motion/1",
+            "times": [0.0, 1.0],
+            "trajectories": [
+              {
+                "id": "communicate",
+                "q0": [0.3, -0.75, 0.0],
+                "q1": [1.3, -0.75, 0.0],
+                "weight": 1.0
+              },
+              {
+                "id": "display",
+                "q0": [0.9, -0.25, 0.0],
+                "q1": [1.9, -0.25, 0.0],
+                "weight": 1.0
+              },
+              {
+                "id": "manifest",
+                "q0": [-0.8, 0.4, 0.0],
+                "q1": [0.19999999999999996, 0.4, 0.0],
+                "weight": 1.0
+              },
+              {
+                "id": "science",
+                "q0": [-0.35, 0.8, 0.0],
+                "q1": [0.65, 0.8, 0.0],
+                "weight": 1.0
+              },
+              {
+                "id": "surface",
+                "q0": [0.75, 0.25, 0.0],
+                "q1": [1.75, 0.25, 0.0],
+                "weight": 1.0
+              },
+              {
+                "id": "tap",
+                "q0": [-0.9, -0.4, 0.0],
+                "q1": [0.09999999999999998, -0.4, 0.0],
+                "weight": 1.0
+              }
+            ]
+          },
+          "numerical_policy": "python-binary64-json/1",
+          "reference_time": 1.0,
+          "schema": "touch-surface-shared/2",
+          "transformation_policy": "paired-translating-plane/2"
+        },
+        "receipt": {
+          "schema": "touch-surface-tap-receipt/2",
+          "scope": {
+            "cycle_id": 0,
+            "pair_id": "pair-A",
+            "session_scope": "session-A"
+          },
+          "core_sha256": "92254591b9480664b409edef1558ec06e91c873f39bb3243d07b303d74ebd4c1",
+          "shared_sha256": "f1eeb24a755213ac22363c0763e7b3e87eca9f9cd33894421ad0b2a9dbdc8261",
+          "origin_sha256": "e53cecd7ae28934e55fb5c75ca3079426d0af227368d76eb363b358abcb8ccc4",
+          "previous_root": "0000000000000000000000000000000000000000000000000000000000000000",
+          "root_sha256": "55dfb3d002739e5102e0211d3297196ef68a13434d28f3e80ad488da85473930"
+        }
+      },
+      "surface": {
+        "scope": {
+          "cycle_id": 0,
+          "pair_id": "pair-A",
+          "session_scope": "session-A"
+        },
+        "mode": "common-translating-plane/2",
+        "tap_root": "55dfb3d002739e5102e0211d3297196ef68a13434d28f3e80ad488da85473930",
+        "shared_sha256": "f1eeb24a755213ac22363c0763e7b3e87eca9f9cd33894421ad0b2a9dbdc8261",
+        "core_sha256": "92254591b9480664b409edef1558ec06e91c873f39bb3243d07b303d74ebd4c1"
+      },
+      "correction": null,
+      "claim": null,
+      "diagnostic": null
+    },
+    "result": {
+      "schema": "touch-surface-pair/2",
+      "pair_status": "surface_derived",
+      "scope": {
+        "cycle_id": 0,
+        "pair_id": "pair-A",
+        "session_scope": "session-A"
+      },
+      "contact_id": "contact-0",
+      "feedback_status": "feedback_pending",
+      "world_contact_cycle_complete": false,
+      "adapter_scope": "SYNTHETIC_READ_ONLY_NOT_AUTHENTICATED",
+      "numerical": {
+        "moving_surface_manifold": {
+          "kind": "local-translating-plane",
+          "origin0": [0.0, 0.0, 0.0],
+          "origin1": [0.0, 0.0, 0.0],
+          "normal": [0.0, 0.0, 1.0],
+          "times": [0.0, 1.0]
+        },
+        "median_tangent_flow": {
+          "schema": "geometric-median/2",
+          "vector": [1.0, 0.0, 0.0],
+          "iterations": 0,
+          "subgradient_residual": null,
+          "certified": true,
+          "certificate_scope": "exact-collinear-input-selection",
+          "selection_ambiguous": false,
+          "tie_break": null,
+          "location_error_bound": 2.220446049250313e-16,
+          "location_tolerance": 1e-6
+        },
+        "normal_distortion": {
+          "value": 0.0,
+          "interpretation": "kinematic-proxy-not-physical-energy"
+        },
+        "residue_field": [
+          {
+            "id": "communicate",
+            "normal": [0.0, 0.0, 0.0],
+            "tangent_deviation": [0.0, 0.0, 0.0]
+          },
+          {
+            "id": "display",
+            "normal": [0.0, 0.0, 0.0],
+            "tangent_deviation": [-1.1102230246251565e-16, 0.0, 0.0]
+          },
+          {
+            "id": "manifest",
+            "normal": [0.0, 0.0, 0.0],
+            "tangent_deviation": [0.0, 0.0, 0.0]
+          },
+          {
+            "id": "science",
+            "normal": [0.0, 0.0, 0.0],
+            "tangent_deviation": [0.0, 0.0, 0.0]
+          },
+          {
+            "id": "surface",
+            "normal": [0.0, 0.0, 0.0],
+            "tangent_deviation": [0.0, 0.0, 0.0]
+          },
+          {
+            "id": "tap",
+            "normal": [0.0, 0.0, 0.0],
+            "tangent_deviation": [0.0, 0.0, 0.0]
+          }
+        ],
+        "normal_escape_rate": 0.0,
+        "relative_contact_expansion": {
+          "status": "not_defined"
+        },
+        "absolute_edge_speed": {
+          "status": "not_defined"
+        },
+        "dimensionless": {
+          "length": 1.0,
+          "time": 1.0,
+          "median": [1.0, 0.0, 0.0],
+          "normal_escape": 0.0,
+          "normal_distortion": 0.0
+        },
+        "surface_path": [
+          {
+            "id": "communicate",
+            "positions": [
+              [0.3, -0.75, 0.0],
+              [1.3, -0.75, 0.0]
+            ]
+          },
+          {
+            "id": "display",
+            "positions": [
+              [0.9, -0.25, 0.0],
+              [1.9, -0.25, 0.0]
+            ]
+          },
+          {
+            "id": "manifest",
+            "positions": [
+              [-0.8, 0.4, 0.0],
+              [0.19999999999999996, 0.4, 0.0]
+            ]
+          },
+          {
+            "id": "science",
+            "positions": [
+              [-0.35, 0.8, 0.0],
+              [0.65, 0.8, 0.0]
+            ]
+          },
+          {
+            "id": "surface",
+            "positions": [
+              [0.75, 0.25, 0.0],
+              [1.75, 0.25, 0.0]
+            ]
+          },
+          {
+            "id": "tap",
+            "positions": [
+              [-0.9, -0.4, 0.0],
+              [0.09999999999999998, -0.4, 0.0]
+            ]
+          }
+        ],
+        "effective_weights": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0],
+        "reconstruction": {
+          "maximum_error": 0.0,
+          "error_bound": 1e-8
+        }
+      },
+      "correction": {
+        "status": "not_defined",
+        "physical_actuation": false
+      },
+      "claim": {
+        "status": "not_established",
+        "reason": "independent-control-unavailable"
+      },
+      "core_balance": {
+        "status": "not_measured",
+        "physical_coupling_proven": false
+      },
+      "diagnostic": {
+        "status": "off"
+      },
+      "receipt": {
+        "surface": {
+          "schema": "touch-surface-surface-receipt/2",
+          "tap_root": "55dfb3d002739e5102e0211d3297196ef68a13434d28f3e80ad488da85473930",
+          "shared_sha256": "f1eeb24a755213ac22363c0763e7b3e87eca9f9cd33894421ad0b2a9dbdc8261",
+          "numerical_commitment": "4afba2350ac416d2f7a0feb21b2b5b34326eb6dd81d7c5c788ff7ff7771aa4a9",
+          "diagnostic_commitment": "87e26e2b1e27c9fffcf7c69a58902e58040468072c0bbaf37082c37bb504bdf0",
+          "control_commitment": "8ed7a23382741d060418d4249f6083926d81e35df2c93cf5e8b99c3ff2ae0c4a",
+          "result_sha256": "58061204286f7e6204234cc0d59b97d5c485fd2a5f0b6085cdfb901a020574d3",
+          "root_sha256": "3c3d5f5d9ddcb6cb65843a711d2c6ae09c4c5123f6bcf59d1b6f506a9d2a4c11"
+        },
+        "pair": {
+          "schema": "touch-surface-pair-receipt/2",
+          "previous_root": "0000000000000000000000000000000000000000000000000000000000000000",
+          "tap_root": "55dfb3d002739e5102e0211d3297196ef68a13434d28f3e80ad488da85473930",
+          "surface_root": "3c3d5f5d9ddcb6cb65843a711d2c6ae09c4c5123f6bcf59d1b6f506a9d2a4c11",
+          "pair_status": "surface_derived",
+          "feedback_status": "feedback_pending",
+          "root_sha256": "990808c98d567aadbe266543c6469dcfad0bd9af9d55e1a4b61e2bf2ae5fcf6c"
+        }
+      }
+    },
+    "tap_only": "incomplete",
+    "surface_only": "unsupported"
+  },
+  "normal_residue": {
+    "request": {
+      "schema": "touch-surface-pair/2",
+      "tap": {
+        "core": {
+          "adapter": "synthetic-read-only/1",
+          "revision": "core-0",
+          "root": "0000000000000000000000000000000000000000000000000000000000000000",
+          "session_scope": "session-A"
+        },
+        "origin": {
+          "adapter": "synthetic-contact/1",
+          "contact_id": "contact-0",
+          "session_scope": "session-A"
+        },
+        "scope": {
+          "cycle_id": 0,
+          "pair_id": "pair-A",
+          "session_scope": "session-A"
+        },
+        "state": {
+          "geometry_revision": "plane-0",
+          "group_policy": null,
+          "motion": {
+            "compatibility": "common-translating-plane/1",
+            "frame": {
+              "normal": [0.0, 0.0, 1.0],
+              "origin0": [0.0, 0.0, 0.0],
+              "origin1": [0.0, 0.0, 0.0],
+              "units": "declared-derived-unit"
+            },
+            "max_displacement": 200.0,
+            "previous_root": "0000000000000000000000000000000000000000000000000000000000000000",
+            "scale": 1.0,
+            "schema": "invariant-surface-motion/1",
+            "times": [0.0, 1.0],
+            "trajectories": [
+              {
+                "id": "communicate",
+                "q0": [0.3, -0.75, 0.0],
+                "q1": [1.3, -0.75, 0.0],
+                "weight": 1.0
+              },
+              {
+                "id": "display",
+                "q0": [0.9, -0.25, 0.0],
+                "q1": [1.9, -0.25, 0.0],
+                "weight": 1.0
+              },
+              {
+                "id": "manifest",
+                "q0": [-0.8, 0.4, 0.0],
+                "q1": [0.19999999999999996, 0.4, 0.0],
+                "weight": 1.0
+              },
+              {
+                "id": "science",
+                "q0": [-0.35, 0.8, 0.0],
+                "q1": [0.65, 0.8, 0.0],
+                "weight": 1.0
+              },
+              {
+                "id": "surface",
+                "q0": [0.75, 0.25, 0.0],
+                "q1": [1.75, 0.25, 0.4],
+                "weight": 1.0
+              },
+              {
+                "id": "tap",
+                "q0": [-0.9, -0.4, 0.0],
+                "q1": [0.09999999999999998, -0.4, 0.0],
+                "weight": 1.0
+              }
+            ]
+          },
+          "numerical_policy": "python-binary64-json/1",
+          "reference_time": 1.0,
+          "schema": "touch-surface-shared/2",
+          "transformation_policy": "paired-translating-plane/2"
+        },
+        "receipt": {
+          "schema": "touch-surface-tap-receipt/2",
+          "scope": {
+            "cycle_id": 0,
+            "pair_id": "pair-A",
+            "session_scope": "session-A"
+          },
+          "core_sha256": "92254591b9480664b409edef1558ec06e91c873f39bb3243d07b303d74ebd4c1",
+          "shared_sha256": "764258642dae679e6ba75b59edd6d42d8ec04915587e2a16e972e4a34aad1bb9",
+          "origin_sha256": "e53cecd7ae28934e55fb5c75ca3079426d0af227368d76eb363b358abcb8ccc4",
+          "previous_root": "0000000000000000000000000000000000000000000000000000000000000000",
+          "root_sha256": "af6c159f50ae08b2c3b5897a2a81cccc3c2c224b52bc66f14655a2942dc69b8e"
+        }
+      },
+      "surface": {
+        "scope": {
+          "cycle_id": 0,
+          "pair_id": "pair-A",
+          "session_scope": "session-A"
+        },
+        "mode": "common-translating-plane/2",
+        "tap_root": "af6c159f50ae08b2c3b5897a2a81cccc3c2c224b52bc66f14655a2942dc69b8e",
+        "shared_sha256": "764258642dae679e6ba75b59edd6d42d8ec04915587e2a16e972e4a34aad1bb9",
+        "core_sha256": "92254591b9480664b409edef1558ec06e91c873f39bb3243d07b303d74ebd4c1"
+      },
+      "correction": null,
+      "claim": null,
+      "diagnostic": null
+    },
+    "result": {
+      "schema": "touch-surface-pair/2",
+      "pair_status": "surface_derived",
+      "scope": {
+        "cycle_id": 0,
+        "pair_id": "pair-A",
+        "session_scope": "session-A"
+      },
+      "contact_id": "contact-0",
+      "feedback_status": "feedback_pending",
+      "world_contact_cycle_complete": false,
+      "adapter_scope": "SYNTHETIC_READ_ONLY_NOT_AUTHENTICATED",
+      "numerical": {
+        "moving_surface_manifold": {
+          "kind": "local-translating-plane",
+          "origin0": [0.0, 0.0, 0.0],
+          "origin1": [0.0, 0.0, 0.0],
+          "normal": [0.0, 0.0, 1.0],
+          "times": [0.0, 1.0]
+        },
+        "median_tangent_flow": {
+          "schema": "geometric-median/2",
+          "vector": [1.0, 0.0, 0.0],
+          "iterations": 0,
+          "subgradient_residual": null,
+          "certified": true,
+          "certificate_scope": "exact-collinear-input-selection",
+          "selection_ambiguous": false,
+          "tie_break": null,
+          "location_error_bound": 2.220446049250313e-16,
+          "location_tolerance": 1e-6
+        },
+        "normal_distortion": {
+          "value": 0.026666666666666672,
+          "interpretation": "kinematic-proxy-not-physical-energy"
+        },
+        "residue_field": [
+          {
+            "id": "communicate",
+            "normal": [0.0, 0.0, 0.0],
+            "tangent_deviation": [0.0, 0.0, 0.0]
+          },
+          {
+            "id": "display",
+            "normal": [0.0, 0.0, 0.0],
+            "tangent_deviation": [-1.1102230246251565e-16, 0.0, 0.0]
+          },
+          {
+            "id": "manifest",
+            "normal": [0.0, 0.0, 0.0],
+            "tangent_deviation": [0.0, 0.0, 0.0]
+          },
+          {
+            "id": "science",
+            "normal": [0.0, 0.0, 0.0],
+            "tangent_deviation": [0.0, 0.0, 0.0]
+          },
+          {
+            "id": "surface",
+            "normal": [0.0, 0.0, 0.4],
+            "tangent_deviation": [0.0, 0.0, 0.0]
+          },
+          {
+            "id": "tap",
+            "normal": [0.0, 0.0, 0.0],
+            "tangent_deviation": [0.0, 0.0, 0.0]
+          }
+        ],
+        "normal_escape_rate": 0.4,
+        "relative_contact_expansion": {
+          "status": "not_defined"
+        },
+        "absolute_edge_speed": {
+          "status": "not_defined"
+        },
+        "dimensionless": {
+          "length": 1.0,
+          "time": 1.0,
+          "median": [1.0, 0.0, 0.0],
+          "normal_escape": 0.4,
+          "normal_distortion": 0.026666666666666672
+        },
+        "surface_path": [
+          {
+            "id": "communicate",
+            "positions": [
+              [0.3, -0.75, 0.0],
+              [1.3, -0.75, 0.0]
+            ]
+          },
+          {
+            "id": "display",
+            "positions": [
+              [0.9, -0.25, 0.0],
+              [1.9, -0.25, 0.0]
+            ]
+          },
+          {
+            "id": "manifest",
+            "positions": [
+              [-0.8, 0.4, 0.0],
+              [0.19999999999999996, 0.4, 0.0]
+            ]
+          },
+          {
+            "id": "science",
+            "positions": [
+              [-0.35, 0.8, 0.0],
+              [0.65, 0.8, 0.0]
+            ]
+          },
+          {
+            "id": "surface",
+            "positions": [
+              [0.75, 0.25, 0.0],
+              [1.75, 0.25, 0.0]
+            ]
+          },
+          {
+            "id": "tap",
+            "positions": [
+              [-0.9, -0.4, 0.0],
+              [0.09999999999999998, -0.4, 0.0]
+            ]
+          }
+        ],
+        "effective_weights": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0],
+        "reconstruction": {
+          "maximum_error": 0.0,
+          "error_bound": 1e-8
+        }
+      },
+      "correction": {
+        "status": "not_defined",
+        "physical_actuation": false
+      },
+      "claim": {
+        "status": "not_established",
+        "reason": "independent-control-unavailable"
+      },
+      "core_balance": {
+        "status": "not_measured",
+        "physical_coupling_proven": false
+      },
+      "diagnostic": {
+        "status": "off"
+      },
+      "receipt": {
+        "surface": {
+          "schema": "touch-surface-surface-receipt/2",
+          "tap_root": "af6c159f50ae08b2c3b5897a2a81cccc3c2c224b52bc66f14655a2942dc69b8e",
+          "shared_sha256": "764258642dae679e6ba75b59edd6d42d8ec04915587e2a16e972e4a34aad1bb9",
+          "numerical_commitment": "9a6e974c6b777fb60f892dab6cba382b40afcca41c546248d405752567970601",
+          "diagnostic_commitment": "87e26e2b1e27c9fffcf7c69a58902e58040468072c0bbaf37082c37bb504bdf0",
+          "control_commitment": "8ed7a23382741d060418d4249f6083926d81e35df2c93cf5e8b99c3ff2ae0c4a",
+          "result_sha256": "aed74144dbbb88b9e34d8b5c941497561cbfe2a2d62ca8e5d68f5418fc5b69ac",
+          "root_sha256": "01faed9d1a3037e1faca0510100e7506664ff14aafeaaec4f7fbf92540b9bcca"
+        },
+        "pair": {
+          "schema": "touch-surface-pair-receipt/2",
+          "previous_root": "0000000000000000000000000000000000000000000000000000000000000000",
+          "tap_root": "af6c159f50ae08b2c3b5897a2a81cccc3c2c224b52bc66f14655a2942dc69b8e",
+          "surface_root": "01faed9d1a3037e1faca0510100e7506664ff14aafeaaec4f7fbf92540b9bcca",
+          "pair_status": "surface_derived",
+          "feedback_status": "feedback_pending",
+          "root_sha256": "d88a5cf42dd6647d0be09e8bcc970bab3de7b9905becd04ed2ea6274bd12cf70"
+        }
+      }
+    },
+    "tap_only": "incomplete",
+    "surface_only": "unsupported"
+  },
+  "sphere": {
+    "points": [
+      [0.3483768079194585, -0.9363228239014899, 0.0439678194249864],
+      [-0.09599794106685451, 0.37757469008466654, 0.9209895486477535],
+      [-0.24017868253110514, -0.8118260445760888, 0.5322148755959053],
+      [0.7286597590667124, 0.6040504870300164, 0.3227661144476608],
+      [-0.24176550679345582, 0.2153931166044347, -0.9461264424189464],
+      [-0.013032288298556438, 0.8700504518050773, 0.4927903923327688]
+    ],
+    "rotation": [
+      [0.955336489125606, -0.29552020666133955, 0.0],
+      [0.29552020666133955, 0.955336489125606, 0.0],
+      [0.0, 0.0, 1.0]
+    ],
+    "moved": [
+      [0.8095193909916585, -0.7915509730018463, 0.0439678194249864],
+      [-0.0032912864260075114, 0.33234154742503413, 0.9209895486477535],
+      [0.21045954113410412, -0.8465446971032887, 0.5322148755959053],
+      [0.7176061312329098, 0.7924051541190651, 0.3227661144476608],
+      [-0.09462042878410543, 0.13432631126751737, -0.9461264424189464],
+      [-0.0695677098716439, 0.8273396394583502, 0.4927903923327688]
+    ],
+    "check": {
+      "source_radius_error": 1.1102230246251565e-16,
+      "radius_error": 1.1102230246251565e-16,
+      "normalised_chord_error": 2.220446049250313e-16,
+      "passed": true
+    },
+    "negative_control": {
+      "source_radius_error": 1.1102230246251565e-16,
+      "radius_error": 0.19251165046849894,
+      "normalised_chord_error": 0.19047384625332375,
+      "passed": false
+    },
+    "canonical": false
+  },
+  "historical_ignition": {
+    "scope": "recorded source report, not rerun upstream initialisation",
+    "roles": ["geometry", "harmonic", "provenance"],
+    "times": [0, 1, 2, 3],
+    "lambda": -0.05,
+    "sample_count": 24,
+    "seed": 17,
+    "external_llm_inference": false
+  }
+}

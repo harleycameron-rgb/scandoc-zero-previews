@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en" data-mode="navigation">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Scandoc Zero · Six-Leg Navigation</title>
+    <link rel="stylesheet" href="base.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to the six-leg entrance</a>
+    <header>
+      <div class="brand">
+        <svg viewBox="0 0 40 40" fill="none" role="img" aria-label="Scandoc Zero mark">
+          <circle cx="20" cy="20" r="9" stroke="currentColor" stroke-width="1.5" />
+          <path
+            d="M20 2v9m0 18v9M2 20h9m18 0h9M7 7l7 7m12 12 7 7M7 33l7-7m12-12 7-7"
+            stroke="currentColor"
+            stroke-width="1.5"
+          />
+        </svg>
+        <div>SCANDOC ZERO<small>THE SIX-LEG ENTRANCE</small></div>
+      </div>
+      <nav aria-label="Page sections">
+        <a href="#junction">Junction</a><a href="#directory">All six legs</a
+        ><a href="#handoff">Handoffs</a
+        ><button id="theme" aria-label="Toggle light and dark theme">Light / dark</button>
+      </nav>
+    </header>
+    <main id="main">
+      <section class="intro">
+        <div>
+          <div class="eyebrow">Distinct instruments. Different intentions.</div>
+          <h1>Six legs. One Scandoc Zero.</h1>
+          <p class="lede">
+            A common topology junction, not a merged engine. Choose a leg to enter its own
+            workspace; the hidden core balance is not reduced to the connections drawn here.
+          </p>
+        </div>
+        <span class="pill">NAVIGATION ONLY · SIX SEPARATE PREVIEWS</span>
+      </section>
+      <section class="workspace" id="junction">
+        <article class="panel">
+          <div class="panel-head">
+            <h2>The common topology entrance</h2>
+            <span class="muted">CHOOSE A LEG</span>
+          </div>
+          <div class="junction-map" id="map">
+            <canvas id="wires" aria-hidden="true"></canvas>
+            <a
+              class="leg-node node-tap"
+              data-leg="tap"
+              href="./tap/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open Tap, original browser instrument, in a new tab"
+              ><span>Tap</span><small>contact</small></a
+            >
+            <a
+              class="leg-node node-surface"
+              data-leg="surface"
+              href="./surface/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open Surface, instrument preview, in a new tab"
+              ><span>Surface</span><small>encounter</small></a
+            >
+            <a
+              class="leg-node node-science"
+              data-leg="science"
+              href="./science/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open Science, knowledge-only preview, in a new tab"
+              ><span>Science</span><small>knowledge</small></a
+            >
+            <a
+              class="leg-node node-communicate"
+              data-leg="communicate"
+              href="./communicate/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open Communicate, revised credit-model preview, in a new tab"
+              ><span>Communicate</span><small>collaboration</small></a
+            >
+            <a
+              class="leg-node node-manifest"
+              data-leg="manifest"
+              href="./manifest/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open Manifest, contract and evidence preview, in a new tab"
+              ><span>Manifest</span><small>declaration</small></a
+            >
+            <a
+              class="leg-node node-display"
+              data-leg="display"
+              href="./display/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open Display, topology inspection preview, in a new tab"
+              ><span>Display</span><small>visibility</small></a
+            >
+            <button class="zero-node" id="zero" aria-label="Inspect the Scandoc Zero overview">
+              <span>SCANDOC</span><strong>ZERO</strong>
+            </button>
+          </div>
+          <div class="map-foot">
+            <span>Each leg opens in a separate tab.</span
+            ><span>Dashed: declared relation, not measured coupling.</span>
+          </div>
+          <div class="junction-note">
+            <strong>At Zero, the coupling is topology.</strong>
+            <p>
+              The map makes the relation approachable. It does not claim to detect or measure the
+              hidden balance.
+            </p>
+          </div>
+        </article>
+        <aside class="panel controls inspector">
+          <div class="field">
+            <label for="inspect">Inspect before entering</label
+            ><select id="inspect">
+              <option value="zero">Scandoc Zero overview</option>
+              <option value="tap">Tap</option>
+              <option value="surface">Surface</option>
+              <option value="science">Science</option>
+              <option value="communicate">Communicate</option>
+              <option value="manifest">Manifest</option>
+              <option value="display">Display</option>
+            </select>
+          </div>
+          <span id="leg-kind" class="eyebrow">COMMON TOPOLOGY JUNCTION</span>
+          <h2 id="leg-title" class="inspector-title">Scandoc Zero</h2>
+          <p id="leg-purpose">
+            Six distinct legs, with different roles, meet at the same junction. Choose a leg here or
+            enter directly from the map.
+          </p>
+          <div class="readout">
+            <strong id="scope-title">What this entrance does</strong
+            ><span id="scope-detail"
+              >Opens the existing previews. It does not combine their local sessions, infer AGI,
+              transfer credit balances or change the released baseline.</span
+            >
+          </div>
+          <a id="open-leg" class="primary-link" href="#directory">Explore all six legs</a>
+          <p class="help" id="open-note">
+            The original app and the exploratory previews keep their own scopes.
+          </p>
+          <div class="separation">
+            <span>Current route</span><strong id="route-label">Zero → choose a leg</strong>
+          </div>
+        </aside>
+      </section>
+
+      <section id="directory" class="directory-section">
+        <div class="section-heading">
+          <h2>Three paired views. Six distinct legs.</h2>
+          <span class="help">Direct entrances to the existing session previews</span>
+        </div>
+        <div class="directory">
+          <article class="pair">
+            <h3>Contact / encounter</h3>
+            <a
+              class="entry"
+              data-directory="tap"
+              href="./tap/"
+              target="_blank"
+              rel="noopener noreferrer"
+              ><div>
+                <strong>Tap</strong
+                ><span>Gesture, moiré gates, sound and local action logging.</span>
+              </div>
+              <small>Original app ↗</small></a
+            ><a
+              class="entry"
+              data-directory="surface"
+              href="./surface/"
+              target="_blank"
+              rel="noopener noreferrer"
+              ><div>
+                <strong>Surface</strong
+                ><span>Contact trace, illustrative field and local stream.</span>
+              </div>
+              <small>HTML preview ↗</small></a
+            >
+          </article>
+          <article class="pair">
+            <h3>Knowledge / collaboration</h3>
+            <a
+              class="entry"
+              data-directory="science"
+              href="./science/"
+              target="_blank"
+              rel="noopener noreferrer"
+              ><div>
+                <strong>Science</strong
+                ><span>Questions, synthetic experiments and a knowledge notebook.</span>
+              </div>
+              <small>No incentives ↗</small></a
+            ><a
+              class="entry"
+              data-directory="communicate"
+              href="./communicate/"
+              target="_blank"
+              rel="noopener noreferrer"
+              ><div>
+                <strong>Communicate</strong
+                ><span>Working-module checks and revised credit / burn modelling.</span>
+              </div>
+              <small>Simulation v2 ↗</small></a
+            >
+          </article>
+          <article class="pair">
+            <h3>Declaration / visibility</h3>
+            <a
+              class="entry"
+              data-directory="manifest"
+              href="./manifest/"
+              target="_blank"
+              rel="noopener noreferrer"
+              ><div>
+                <strong>Manifest</strong
+                ><span>Declared contracts, provenance and scoped evidence.</span>
+              </div>
+              <small>Local binding ↗</small></a
+            ><a
+              class="entry"
+              data-directory="display"
+              href="./display/"
+              target="_blank"
+              rel="noopener noreferrer"
+              ><div>
+                <strong>Display</strong
+                ><span>Relations, transformation traces and evidence inspection.</span>
+              </div>
+              <small>Inspectable view ↗</small></a
+            >
+          </article>
+        </div>
+      </section>
+
+      <section id="handoff" class="handoff">
+        <div>
+          <div class="eyebrow">A deliberate handoff, not automatic data flow</div>
+          <h2>Manifest → local record → Display</h2>
+          <p>
+            Bind a declaration in Manifest, export its preview JSON, then open it in Display.
+            Display checks content digests and recomputes the bounded synthetic example; it does not
+            authenticate the source or verify prior receipt continuity.
+          </p>
+          <div class="row">
+            <a href="./manifest/" target="_blank" rel="noopener noreferrer">Open Manifest ↗</a
+            ><a href="./display/" target="_blank" rel="noopener noreferrer">Open Display ↗</a>
+          </div>
+        </div>
+        <aside>
+          <h3>The separation matters</h3>
+          <p>
+            Science has no credit incentive. Communicate’s credits and refunds remain non-cash
+            simulations. The sphere stays provisional and non-canonical; no navigation link turns a
+            preview into a validated engine.
+          </p>
+        </aside>
+      </section>
+      <section class="panel content" style="margin-top: var(--s6)">
+        <div class="eyebrow">Observe the shared junction</div>
+        <h2>Zero / Harness Observatory</h2>
+        <p>
+          Explore Sentinel Dot A/B, simulated ignition, six distinct trajectories and sampled
+          counterexamples. The harness is an observatory at Zero, not a seventh leg or a measured
+          hidden core.
+        </p>
+        <a class="primary-link" href="./harness/" target="_blank" rel="noopener noreferrer"
+          >Open the harness ↗</a
+        >
+      </section>
+      <footer>
+        <span>WAXTABLET / SCANDOC ZERO · SIX-LEG NAVIGATION</span
+        ><span>No shared account, raw-data collection or live engine integration.</span>
+      </footer>
+    </main>
+  </body>
+</html>
