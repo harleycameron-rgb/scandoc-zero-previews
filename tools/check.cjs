@@ -15,6 +15,7 @@ function walk(dir) {
   }
 }
 walk(site);
+require('./surface-model.test.cjs');
 
 let links = 0;
 for (const file of files) {
@@ -25,7 +26,11 @@ for (const file of files) {
   if (!file.endsWith('.html')) continue;
   const html = fs.readFileSync(file, 'utf8');
   for (const match of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/g)) {
-    if (/\bsrc=/.test(match[1]) || /\btype=["'](?:application\/ld\+json|importmap)["']/.test(match[1])) continue;
+    if (
+      /\bsrc=/.test(match[1]) ||
+      /\btype=["'](?:application\/ld\+json|importmap)["']/.test(match[1])
+    )
+      continue;
     new vm.Script(match[2], { filename: file });
   }
   for (const match of html.matchAll(/(?:src|href)=["']([^"']+)["']/g)) {
@@ -54,7 +59,10 @@ for (const name of ['tap', 'surface', 'science', 'communicate', 'manifest', 'dis
 assert.ok(!hub.includes('www.perplexity.ai/computer/a/'), 'Hub routes must be independent');
 const worker = fs.readFileSync(path.join(site, 'tap/sw.js'), 'utf8');
 assert.ok(worker.includes('k.startsWith(PREFIX)'), 'Tap cleanup must not delete sibling caches');
-assert.ok(worker.includes('url.pathname.startsWith(scope.pathname)'), 'Tap fetch scope must be bounded');
+assert.ok(
+  worker.includes('url.pathname.startsWith(scope.pathname)'),
+  'Tap fetch scope must be bounded',
+);
 const fixture = JSON.parse(fs.readFileSync(path.join(site, 'harness/fixture.json'), 'utf8'));
 assert.equal(fixture.source_revision, '56f072bef29003b4c730e6e7cf221ff87b801362');
 assert.equal(fixture.planar.result.pair_status, 'surface_derived');

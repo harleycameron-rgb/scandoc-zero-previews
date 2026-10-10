@@ -22,13 +22,13 @@ const LEGS = {
     note: 'Opens the existing original-app preview in a separate tab.',
   },
   surface: {
-    kind: 'Instrument-layer HTML preview',
+    kind: 'Convex-layer output preview · v2',
     title: 'Surface',
     purpose:
-      'Gesture contact leaves a trace across an illustrative field and produces a local placeholder wobble-state stream.',
+      'Touch excites inward pulses, stitched paths and an indirect rhythm loop across a declared convex-layer field.',
     scopeTitle: 'Visual response is not a verified invariant',
     scope:
-      'Surface’s current HTML preview represents its scaffold. The mesh is illustrative, and its labels are not cryptographic proof or a live engine connection.',
+      'Sawtooth and wobble encode synthetic layer conditions, not measured Earth distortion. Outputs are ephemeral, with optional tilt; no gesture archive, recorder or live Tap link exists.',
     note: 'Opens the existing Surface preview in a separate tab.',
   },
   science: {

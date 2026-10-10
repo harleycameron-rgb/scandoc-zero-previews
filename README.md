@@ -12,14 +12,16 @@ All HTML, CSS and JavaScript is formatted for reading. There is no framework, in
 | ----------- | ---------------------------------------------------- | ---------------------------------------------------------- |
 | Six-leg hub | [site/index.html](site/index.html)                   | Local routes to all six apps and the harness               |
 | Tap         | [site/tap/index.html](site/tap/index.html)           | Original browser instrument                                |
-| Surface     | [site/surface/index.html](site/surface/index.html)   | Illustrative instrument scaffold                           |
+| Surface     | [site/surface/index.html](site/surface/index.html)   | Convex-layer output, optional tilt and touch-seeded rhythm |
 | Science     | [site/science/index.html](site/science/index.html)   | Knowledge-only experiments                                 |
 | Communicate | [site/communicate/core.js](site/communicate/core.js) | Simulated credit and burn policy                           |
 | Manifest    | [site/manifest/core.js](site/manifest/core.js)       | Contract declarations and local bindings                   |
 | Display     | [site/display/core.js](site/display/core.js)         | Imported-record inspection                                 |
 | Harness     | [site/harness/app.js](site/harness/app.js)           | Scripted adapters, A/B receipts and trajectory diagnostics |
 
-Use `index.html` for wording and layout, CSS files for visual style, and JS files for logic. Surface and Tap include much of their logic inside their HTML. Manifest and Display each contain a copy of `core.js`; if changing their common record schema, update both and test the handoff.
+Use `index.html` for wording and layout, CSS files for visual style, and JS files for logic. Surface's editable layer model is in `site/surface/model.js`; its screen/audio implementation is in `app.js`. Tap includes much of its logic inside its HTML. Manifest and Display each contain a copy of `core.js`; if changing their common record schema, update both and test the handoff.
+
+The [Surface output specification](docs/SURFACE-OUTPUT-SPEC.md) describes its synthetic trigger policy, indirect rhythm and zero-data limits. It does not infer radius, origin, high-energy-site causation or measured core balance.
 
 ## Run and check locally
 
