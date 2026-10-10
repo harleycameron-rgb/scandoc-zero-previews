@@ -37,6 +37,8 @@ This checks JavaScript syntax, local routes and assets, fixture boundaries, inde
 
 Public publication was approved on 2026-10-10. The repository and its source are public; the previews are hosted through GitHub Pages.
 
+Open the [live six-leg entrance](https://harleycameron-rgb.github.io/scandoc-zero-previews/) or go directly to the [Harness Observatory](https://harleycameron-rgb.github.io/scandoc-zero-previews/harness/). Edit the source in [GitHub's browser editor](https://github.dev/harleycameron-rgb/scandoc-zero-previews).
+
 The workflow at `.github/workflows/pages.yml` checks and publishes changes to `site/`, `tools/check.cjs` or the workflow when they are committed to `main`. You can also trigger it manually. Documentation-only commits do not redeploy. A failed check prevents the new deployment; check the repository's Actions tab before assuming an edit is live.
 
 The hosted entry point is `site/index.html`. All navigation uses relative routes and does not depend on Perplexity preview URLs. The remote Fontshare font is optional; browser fallback fonts keep the pages usable.
