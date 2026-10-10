@@ -1,6 +1,6 @@
 // Hosting-only migration: isolate Tap's offline cache from sibling previews.
 // Bump VERSION when publishing changed Tap assets to refresh installed copies.
-const VERSION = 'v1';
+const VERSION = 'v2-doi-evidence';
 const PREFIX = 'scandoc-preview-tap:' + self.registration.scope + ':';
 const CACHE = PREFIX + VERSION;
 const FILES = [

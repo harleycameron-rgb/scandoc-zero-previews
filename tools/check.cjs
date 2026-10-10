@@ -16,6 +16,7 @@ function walk(dir) {
 }
 walk(site);
 require('./surface-model.test.cjs');
+require('./benchmark-registry.test.cjs');
 
 let links = 0;
 for (const file of files) {

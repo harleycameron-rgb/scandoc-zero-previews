@@ -9,6 +9,8 @@ on:
     paths:
       - 'site/**'
       - 'tools/check.cjs'
+      - 'tools/build-evidence.cjs'
+      - 'tools/benchmark-registry.test.cjs'
       - '.github/workflows/pages.yml'
 
 permissions:
@@ -32,6 +34,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Compile scoped DOI evidence
+        run: node tools/build-evidence.cjs
       - name: Check routes, fixtures and receipts
         run: node tools/check.cjs
       - uses: actions/configure-pages@v5

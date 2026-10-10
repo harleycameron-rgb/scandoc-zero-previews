@@ -45,6 +45,14 @@ The workflow at `.github/workflows/pages.yml` checks and publishes changes to `s
 
 The hosted entry point is `site/index.html`. All navigation uses relative routes and does not depend on Perplexity preview URLs. The remote Fontshare font is optional; browser fallback fonts keep the pages usable.
 
+## DOI evidence and benchmark updates
+
+All eight previews have a scoped DOI panel generated from `site/benchmarks.json`. A reference deposit is not automatically the benchmark of a browser implementation. The exact planar source-fixture pin, provisional sphere checkpoint and different-pin related works are labelled separately; Communicate does not invent a credit-policy DOI.
+
+To set a reviewed benchmark, edit that registry with its exact published DOI/version, source commit and scope, then run `node tools/build-evidence.cjs` and `node tools/check.cjs`. A commit to `main` automatically compiles and deploys the panels through the existing Pages workflow. Changing a Zenodo record alone does not silently change the registry or runtime.
+
+The hub provides a bounded manual same-origin metadata check and optional 15-minute visible-page checks. Polling is off initially; other instruments and Science do not poll. No external model calls, identity, payment or task scheduling are involved. See [the benchmark publication contract](docs/BENCHMARK-PUBLICATION-CONTRACT.md).
+
 ## Boundaries and editing safeguards
 
 - **Independent instruments:** Tap and Surface retain separate app identities while sharing the paired state/receipt contract at Zero.

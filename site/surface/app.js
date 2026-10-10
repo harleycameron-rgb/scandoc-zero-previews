@@ -235,7 +235,8 @@ function emit(event, source = 'touch') {
   $('condition-title').textContent = labels[derived.kind][0];
   $('condition-detail').textContent = labels[derived.kind][1];
   $('field-state').textContent =
-    source === 'fixture' ? 'Synthetic fixture output' : 'Contact excites output';
+    source === 'fixture' ? 'Synthetic fixture output' :
+      source === 'movement' ? 'Movement shapes the derived rhythm' : 'Contact excites output';
   $('caption').textContent =
     derived.kind === 'endpoint'
       ? 'Endpoint unresolved; this rhythm step stays silent.'
@@ -274,7 +275,7 @@ canvas.addEventListener('pointermove', (e) => {
   const now = performance.now();
   if (event.kind === 'sawtooth' || now - lastEmit >= 65) {
     lastEmit = now;
-    emit(event);
+    emit(event, 'movement');
   }
 });
 function finish(e) {

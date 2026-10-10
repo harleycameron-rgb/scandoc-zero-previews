@@ -327,6 +327,15 @@ function science() {
     renderJournal();
     $('note-status').textContent = 'Notebook cleared.';
   };
+  $('reset-experiment').onclick = () => {
+    $('transformation').value = 'translation';
+    $('amount').value = '50';
+    $('amount').dispatchEvent(new Event('input', { bubbles: true }));
+    last = null;
+    $('test-title').textContent = 'Local experiment reset';
+    $('test-detail').textContent = 'Choose a transformation and compare. No network or credit system is involved.';
+    $('add-observation').disabled = !$('note').value.trim();
+  };
   renderJournal();
 }
 function communicate() {

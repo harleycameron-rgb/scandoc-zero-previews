@@ -1,0 +1,157 @@
+{
+  "schema": "scandoc-zero-benchmark-registry/1",
+  "revision": "2026-10-10-research-publication-candidate-1",
+  "reviewed_at": "2026-10-10",
+  "release_status": "research-publication-candidate",
+  "claims": {
+    "demonstrated_agi": false,
+    "external_llm_inference": false,
+    "canonical_sphere": false,
+    "physical_validation": false
+  },
+  "records": [
+    {
+      "id": "planar-session",
+      "doi": "10.5281/zenodo.23279566",
+      "url": "https://zenodo.org/records/23279566",
+      "title": "WaxTablet Paired Touch-Surface Synthetic Session Kernel 0.4.0",
+      "version": "0.4.0",
+      "source_commit": "56f072bef29003b4c730e6e7cf221ff87b801362",
+      "evidence_status": "published-report",
+      "access": "open",
+      "scope": "Synthetic planar pair/session kernel. Deposited report: 39 portable tests, 322 private-suite tests, 129 optimized session/pair/motion tests and 13 separate manufactured checks. These counts do not certify the browser previews.",
+      "canonical": false
+    },
+    {
+      "id": "sphere-checkpoint",
+      "doi": "10.5281/zenodo.23270319",
+      "url": "https://zenodo.org/records/23270319",
+      "title": "multi-llm-sphere-orchestration-provisional-benchmark",
+      "version": "provisional-checkpoint-1",
+      "source_commit": "38e8525e03b0955a6ea281dd98921a1b0c11bcc8",
+      "evidence_status": "published-provisional",
+      "access": "open",
+      "scope": "Historical orchestration checkpoint. Quarantined and non-canonical. Symbolic model adapters are not external LLM inference; independent cross-model convergence was not measured.",
+      "canonical": false
+    },
+    {
+      "id": "sentinel-reference",
+      "doi": "10.5281/zenodo.23174076",
+      "url": "https://zenodo.org/records/23174076",
+      "title": "sentinel_dot: tamper-evident action logs for AI agents",
+      "version": "v0.3.0",
+      "source_commit": "99923c406b5ee71630e93dde4a6be3293647f8a4",
+      "evidence_status": "related-published-report",
+      "access": "restricted-files",
+      "scope": "Related action-log package. Deposited report: 157 passed, 2 deselected. Different pinned source from the copied browser writer; not a rerun, signature or anchoring claim for this preview.",
+      "canonical": false
+    },
+    {
+      "id": "moire-reference",
+      "doi": "10.5281/zenodo.23174093",
+      "url": "https://zenodo.org/records/23174093",
+      "title": "Invariant Drift Instrument (Moiré Pad · Sky Fused)",
+      "version": "2026.10.06",
+      "source_commit": "1e3e98f8c2ab404160b0450159940ed3f6f78d90",
+      "evidence_status": "related-published-report",
+      "access": "restricted-files",
+      "scope": "Related moiré instrument deposit. Deposited report: five tests. Source revision differs from this Tap browser import; it is not the benchmark of the new contact pulse or receipt additions.",
+      "canonical": false
+    }
+  ],
+  "modules": [
+    {
+      "id": "tap",
+      "title": "InvariantTap",
+      "route": "tap/",
+      "filename": "InvariantTap.html",
+      "status": "local-preview-checks",
+      "scope": "Contact-driven moiré, sound pulse and completed-contact receipts. No exact DOI benchmark of these new browser additions is published yet.",
+      "references": [
+        {"record": "moire-reference", "relation": "related instrument; different source pin"},
+        {"record": "sentinel-reference", "relation": "related receipt method; not preview certification"},
+        {"record": "planar-session", "relation": "paired contract foundation; not Tap UI benchmark"}
+      ]
+    },
+    {
+      "id": "surface",
+      "title": "Invariant Surface",
+      "route": "surface/",
+      "filename": "Invariant-Surface.html",
+      "status": "local-preview-checks",
+      "scope": "Convex-layer chart, sawtooth/wobble outputs, indirect rhythm and optional tilt. No physical curvature or high-energy-site measurement; no exact audio/tilt benchmark DOI yet.",
+      "references": [
+        {"record": "planar-session", "relation": "synthetic paired/session foundation; not convex screen/audio certification"},
+        {"record": "sphere-checkpoint", "relation": "quarantined historical context only"}
+      ]
+    },
+    {
+      "id": "science",
+      "title": "AGI Science",
+      "route": "science/",
+      "filename": "AGI-Science.html",
+      "status": "local-preview-checks",
+      "scope": "Knowledge-only local synthetic topology comparisons. No module-specific published benchmark; no rewards or network simulation calls.",
+      "references": [
+        {"record": "planar-session", "relation": "synthetic geometry research foundation; not this notebook benchmark"},
+        {"record": "sphere-checkpoint", "relation": "provisional context, not canonical science output"}
+      ]
+    },
+    {
+      "id": "communicate",
+      "title": "AGI Communicate",
+      "route": "communicate/",
+      "filename": "AGI-Communicate.html",
+      "status": "local-preview-checks",
+      "scope": "Virtual, memory-only credits, bonuses and evidence-bound compensation. No module-specific published credit-policy benchmark and no real accounts, money or social score.",
+      "references": []
+    },
+    {
+      "id": "manifest",
+      "title": "Manifest",
+      "route": "manifest/",
+      "filename": "Manifest.html",
+      "status": "local-preview-checks",
+      "scope": "Declared contracts and exportable evidence entries. No module-specific published browser-schema benchmark.",
+      "references": [
+        {"record": "planar-session", "relation": "scoped receipt/continuity foundation; not schema compatibility"}
+      ]
+    },
+    {
+      "id": "display",
+      "title": "Display",
+      "route": "display/",
+      "filename": "Display.html",
+      "status": "local-preview-checks",
+      "scope": "Manifest single/history inspection and synthetic recomputation. No module-specific published inspection benchmark; content integrity is not authenticated provenance.",
+      "references": [
+        {"record": "planar-session", "relation": "evidence interpretation foundation; not Display certification"}
+      ]
+    },
+    {
+      "id": "harness",
+      "title": "Harness Observatory",
+      "route": "harness/",
+      "filename": "Harness-Observatory.html",
+      "status": "local-preview-checks",
+      "scope": "Scripted orchestration with Sentinel A/B linkage. Planar source fixture is pinned to the published kernel commit. Browser model adapters do not call external LLMs.",
+      "references": [
+        {"record": "planar-session", "relation": "exact planar source-fixture revision"},
+        {"record": "sphere-checkpoint", "relation": "historical sphere event; non-canonical"},
+        {"record": "sentinel-reference", "relation": "related action-log research; different browser writer pin"}
+      ]
+    },
+    {
+      "id": "hub",
+      "title": "Scandoc Zero Navigation",
+      "route": "./",
+      "filename": "Scandoc-Zero-Navigation.html",
+      "status": "local-preview-checks",
+      "scope": "Navigation and evidence catalogue, not shared live execution. No module-specific published navigation benchmark.",
+      "references": [
+        {"record": "planar-session", "relation": "published synthetic baseline"},
+        {"record": "sphere-checkpoint", "relation": "separate quarantined checkpoint"}
+      ]
+    }
+  ]
+}

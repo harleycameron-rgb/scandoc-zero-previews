@@ -391,6 +391,8 @@ function lock() {
   for (const el of document.querySelectorAll('[data-work-control]')) el.disabled = busy;
   if ($('export')) $('export').disabled = busy || !current;
   if ($('export-history')) $('export-history').disabled = busy || !history.length;
+  if ($('record-select'))
+    $('record-select').disabled = busy || $('record-select').options.length < 2;
 }
 function keys(v, expected) {
   if (
@@ -556,6 +558,27 @@ if (MODE === 'manifest') {
     renderRecord();
   };
 } else {
+  let inspectedRecords = [];
+  function installRecords(records, origin) {
+    inspectedRecords = records;
+    const select = $('record-select');
+    select.replaceChildren(...records.map((record, index) => {
+      const option = document.createElement('option');
+      option.value = String(index);
+      option.textContent = `${index + 1}. ${record.manifest.title} · ${statusName(record.manifest.evidence.status)}`;
+      return option;
+    }));
+    select.disabled = records.length < 2;
+    select.value = '0';
+    current = records[0];
+    $('load-origin').textContent = origin;
+  }
+  $('record-select').onchange = () => {
+    const record = inspectedRecords[Number($('record-select').value)];
+    if (!record || busy) return;
+    current = record;
+    renderRecord();
+  };
   for (const button of document.querySelectorAll('[data-view]'))
     button.onclick = () => {
       view = button.dataset.view;
@@ -573,8 +596,7 @@ if (MODE === 'manifest') {
     };
   async function loadDemo(kind) {
     const candidate = await envelope(defaultBody(kind));
-    current = await verify(candidate);
-    $('load-origin').textContent = 'Built-in synthetic example';
+    installRecords([await verify(candidate)], 'Built-in synthetic example');
     setStatus(
       'Demo loaded · content integrity matched',
       'The synthetic case was recomputed. Source provenance and prior receipt continuity are not independently verified.',
@@ -588,11 +610,30 @@ if (MODE === 'manifest') {
       const f = $('import').files[0];
       if (!f) return;
       try {
-        if (f.size > 65536) throw Error('The derived preview JSON must be 64 KB or smaller.');
-        const parsed = JSON.parse(await f.text()),
-          checked = await verify(parsed);
-        current = checked;
-        $('load-origin').textContent = 'User-selected local JSON';
+        if (f.size > 262144) throw Error('The derived preview JSON must be 256 KB or smaller.');
+        const parsed = JSON.parse(await f.text());
+        let checked;
+        if (parsed.schema === 'scandoc-zero-manifest-history-preview/v1') {
+          keys(parsed, ['schema', 'records', 'head']);
+          if (!Array.isArray(parsed.records) || !parsed.records.length || parsed.records.length > 16)
+            throw Error('History must contain 1–16 records.');
+          checked = [];
+          let previous = '0'.repeat(64);
+          for (const record of parsed.records) {
+            if (JSON.stringify(record).length > 65536) throw Error('A record exceeds 64 KB.');
+            const valid = await verify(record);
+            if (valid.receipt.sequence !== checked.length + 1 ||
+                valid.receipt.previous_receipt_hash !== previous)
+              throw Error('History sequence or internal receipt link mismatch.');
+            checked.push(valid);
+            previous = valid.receipt.receipt_hash;
+          }
+          if (parsed.head !== previous) throw Error('History head mismatch.');
+        } else {
+          if (f.size > 65536) throw Error('A single record must be 64 KB or smaller.');
+          checked = [await verify(parsed)];
+        }
+        installRecords(checked, 'User-selected local JSON · ' + checked.length + ' record(s)');
         setStatus(
           'Local record loaded · content integrity matched',
           'Manifest and receipt digests match; the synthetic case recomputes. This is not authenticated provenance or an anchored receipt chain.',
@@ -610,6 +651,9 @@ if (MODE === 'manifest') {
   $('clear').onclick = () => {
     if (busy) return;
     current = null;
+    inspectedRecords = [];
+    $('record-select').replaceChildren(new Option('No imported records', ''));
+    $('record-select').disabled = true;
     $('load-origin').textContent = 'No bound record';
     setStatus(
       'View cleared',

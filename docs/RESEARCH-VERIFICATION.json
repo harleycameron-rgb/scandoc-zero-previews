@@ -1,0 +1,330 @@
+{
+  "schema": "scandoc-zero-research-preview-verification/1",
+  "state": "PUBLICATION_CANDIDATE",
+  "version": "0.1.0",
+  "registryRevision": "2026-10-10-research-publication-candidate-1",
+  "checkedAt": "2026-10-10T15:16:57.595Z",
+  "productionBaseline": {
+    "commit": "56f072bef29003b4c730e6e7cf221ff87b801362",
+    "unchanged": true
+  },
+  "functionalChecks": [
+    {
+      "module": "Tap",
+      "receipt": {
+        "count": 1,
+        "action": "tap",
+        "raw": false,
+        "hash": true
+      },
+      "rapidCount": 3
+    },
+    {
+      "module": "Surface",
+      "movement": true,
+      "wobble": true,
+      "snapshot": {
+        "version": 2,
+        "playing": true,
+        "step": -1,
+        "traceCount": 2,
+        "pattern": [
+          {
+            "kind": "continuous",
+            "energy": 0.12,
+            "severity": 0.1
+          },
+          {
+            "kind": "continuous",
+            "energy": 0,
+            "severity": 0
+          },
+          {
+            "kind": "continuous",
+            "energy": 0.2,
+            "severity": 0.2
+          },
+          {
+            "kind": "continuous",
+            "energy": 0,
+            "severity": 0
+          },
+          {
+            "kind": "sawtooth",
+            "energy": 0.7000000000000002,
+            "severity": 0.5000000000000002
+          },
+          {
+            "kind": "continuous",
+            "energy": 0,
+            "severity": 0
+          },
+          {
+            "kind": "continuous",
+            "energy": 0,
+            "severity": 0
+          },
+          {
+            "kind": "continuous",
+            "energy": 0,
+            "severity": 0
+          },
+          {
+            "kind": "continuous",
+            "energy": 0.12,
+            "severity": 0.1
+          },
+          {
+            "kind": "continuous",
+            "energy": 0,
+            "severity": 0
+          },
+          {
+            "kind": "continuous",
+            "energy": 0,
+            "severity": 0
+          },
+          {
+            "kind": "continuous",
+            "energy": 0,
+            "severity": 0
+          },
+          {
+            "kind": "continuous",
+            "energy": 0,
+            "severity": 0
+          },
+          {
+            "kind": "continuous",
+            "energy": 0,
+            "severity": 0
+          },
+          {
+            "kind": "continuous",
+            "energy": 0,
+            "severity": 0
+          },
+          {
+            "kind": "continuous",
+            "energy": 0,
+            "severity": 0
+          }
+        ],
+        "soundEnabled": true,
+        "audioState": "running",
+        "activeNodes": 0,
+        "audioPulses": 0,
+        "tiltEnabled": false,
+        "rawContactHistory": 0,
+        "recorder": false,
+        "coreBalance": "not_measured"
+      }
+    },
+    {
+      "module": "Science",
+      "translation": true,
+      "shear": true,
+      "reset": true
+    },
+    {
+      "module": "Communicate",
+      "bonus": 4,
+      "reloadReset": true,
+      "voluntaryBurn": true
+    },
+    {
+      "module": "Manifest",
+      "contracts": 2,
+      "historyExport": true,
+      "entrySelection": true
+    },
+    {
+      "module": "Display",
+      "historyImport": true,
+      "eachRecord": true,
+      "tamperRejected": true,
+      "priorRetained": true
+    },
+    {
+      "module": "Harness",
+      "ignition": true,
+      "receiptA": true,
+      "receiptB": true,
+      "verification": true
+    },
+    {
+      "module": "Navigation",
+      "routes": [
+        "InvariantTap.html",
+        "Invariant-Surface.html",
+        "AGI-Science.html",
+        "AGI-Communicate.html",
+        "Manifest.html",
+        "Display.html",
+        "Harness-Observatory.html"
+      ]
+    }
+  ],
+  "accountingAndViewportChecks": [
+    {
+      "faultBurnRejectedWithoutEvidence": true,
+      "reviewedFaultNet": 10,
+      "bonusNotStacked": true
+    },
+    {
+      "file": "InvariantTap",
+      "size": "phone",
+      "overflow": false
+    },
+    {
+      "file": "Invariant-Surface",
+      "size": "phone",
+      "overflow": false
+    },
+    {
+      "file": "AGI-Science",
+      "size": "phone",
+      "overflow": false
+    },
+    {
+      "file": "AGI-Communicate",
+      "size": "phone",
+      "overflow": false
+    },
+    {
+      "file": "Manifest",
+      "size": "phone",
+      "overflow": false
+    },
+    {
+      "file": "Display",
+      "size": "phone",
+      "overflow": false
+    },
+    {
+      "file": "Harness-Observatory",
+      "size": "phone",
+      "overflow": false
+    },
+    {
+      "file": "Scandoc-Zero-Navigation",
+      "size": "phone",
+      "overflow": false
+    },
+    {
+      "file": "InvariantTap",
+      "size": "desktop",
+      "overflow": false
+    },
+    {
+      "file": "Invariant-Surface",
+      "size": "desktop",
+      "overflow": false
+    },
+    {
+      "file": "AGI-Science",
+      "size": "desktop",
+      "overflow": false
+    },
+    {
+      "file": "AGI-Communicate",
+      "size": "desktop",
+      "overflow": false
+    },
+    {
+      "file": "Manifest",
+      "size": "desktop",
+      "overflow": false
+    },
+    {
+      "file": "Display",
+      "size": "desktop",
+      "overflow": false
+    },
+    {
+      "file": "Harness-Observatory",
+      "size": "desktop",
+      "overflow": false
+    },
+    {
+      "file": "Scandoc-Zero-Navigation",
+      "size": "desktop",
+      "overflow": false
+    }
+  ],
+  "evidenceUpdateChecks": [
+    {
+      "defaultPolling": false,
+      "manualCheck": true,
+      "etag304": true,
+      "newRevision": true,
+      "scopePromotionRejected": true,
+      "priorEvidenceRetained": true
+    },
+    {
+      "module": "tap",
+      "doiLinks": 3,
+      "overflow": false
+    },
+    {
+      "module": "surface",
+      "doiLinks": 2,
+      "overflow": false
+    },
+    {
+      "module": "science",
+      "doiLinks": 2,
+      "overflow": false
+    },
+    {
+      "module": "communicate",
+      "doiLinks": 0,
+      "overflow": false
+    },
+    {
+      "module": "manifest",
+      "doiLinks": 1,
+      "overflow": false
+    },
+    {
+      "module": "display",
+      "doiLinks": 1,
+      "overflow": false
+    },
+    {
+      "module": "harness",
+      "doiLinks": 3,
+      "overflow": false
+    },
+    {
+      "module": "hub",
+      "doiLinks": 2,
+      "overflow": false
+    },
+    {
+      "hostedTapReceipt": true
+    },
+    {
+      "hostedHarnessReceipts": true
+    }
+  ],
+  "scriptErrors": [],
+  "staticChecks": {
+    "command": "node tools/check.cjs",
+    "result": "passed",
+    "assets": 38,
+    "localReferences": 50
+  },
+  "limitations": {
+    "physicalIPhoneTested": false,
+    "externalLLMInference": false,
+    "AGIDemonstrated": false,
+    "canonicalSphere": false,
+    "upstreamSuitesRerun": false
+  },
+  "publication": {
+    "githubReleasePublished": false,
+    "zenodoPublished": false,
+    "newLicenseApplied": false
+  }
+}

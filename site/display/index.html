@@ -105,10 +105,17 @@
           <h2>A local handoff from Manifest</h2>
           <label for="import">Choose a derived Manifest preview JSON</label
           ><input id="import" data-work-control type="file" accept=".json,application/json" />
+          <label for="record-select">Inspect a validated record</label>
+          <select id="record-select" data-work-control disabled aria-label="Imported Manifest records">
+            <option>No imported records</option>
+          </select>
+          <p class="help">Accepts one Manifest or its history export: up to 16 records / 256 KB.
+            Every record is checked before the view changes. Imported history links are checked
+            internally, not independently authenticated.</p>
           <p class="help">
             The file is read in this browser, not uploaded to a service. Only the strict preview
             schema, declared six-leg graph, valid content digests and recomputable synthetic
-            evidence are accepted. Maximum 64 KB.
+            evidence are accepted. Maximum 64 KB per single record; 256 KB for a linked history.
           </p>
           <div class="readout" id="action-status" role="status">
             <strong id="action-title">Preparing local example</strong
@@ -208,6 +215,22 @@
         <span>WAXTABLET / SCANDOC ZERO · DISPLAY LEG</span
         ><span>Local memory only. No credit awards, live AGI or production integration.</span>
       </footer>
-    </main>
+    <!-- BEGIN BENCHMARK EVIDENCE -->
+<section class="benchmark-evidence" aria-label="Scoped benchmark and DOI evidence" data-benchmark-revision="2026-10-10-research-publication-candidate-1"
+ style="margin:24px 0;padding:16px;border:1px solid currentColor;border-radius:6px;line-height:1.5;overflow-wrap:anywhere">
+ <details><summary><strong>Benchmark evidence · Display</strong></summary>
+ <p>Manifest single/history inspection and synthetic recomputation. No module-specific published inspection benchmark; content integrity is not authenticated provenance.</p>
+ <p><strong>Status:</strong> local browser/software checks, not AGI or physical validation. DOI reports below retain their own source and scope.</p>
+ <ul style="padding-left:20px"><li style="margin:10px 0"><a href="https://doi.org/10.5281/zenodo.23279566" target="_blank" rel="noopener noreferrer">10.5281/zenodo.23279566</a>
+      <span> · WaxTablet Paired Touch-Surface Synthetic Session Kernel 0.4.0 (0.4.0)</span><br>
+      <small>evidence interpretation foundation; not Display certification. open. Synthetic planar pair/session kernel. Deposited report: 39 portable tests, 322 private-suite tests, 129 optimized session/pair/motion tests and 13 separate manufactured checks. These counts do not certify the browser previews.</small></li></ul>
+ <p><small>Registry 2026-10-10-research-publication-candidate-1 · reviewed 2026-10-10.
+ The archived snapshot is immutable; later benchmark settings update the live site only.
+ Updated evidence does not silently replace a running fixture or promote the sphere.</small></p>
+
+ </details>
+</section>
+<!-- END BENCHMARK EVIDENCE -->
+</main>
   </body>
 </html>

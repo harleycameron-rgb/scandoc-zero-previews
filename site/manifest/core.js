@@ -391,6 +391,8 @@ function lock() {
   for (const el of document.querySelectorAll('[data-work-control]')) el.disabled = busy;
   if ($('export')) $('export').disabled = busy || !current;
   if ($('export-history')) $('export-history').disabled = busy || !history.length;
+  if ($('evidence-record-select'))
+    $('evidence-record-select').disabled = busy || !history.length;
 }
 function keys(v, expected) {
   if (
@@ -487,6 +489,27 @@ async function verify(value) {
   return snapshot(value);
 }
 if (MODE === 'manifest') {
+  function refreshEvidenceEntries() {
+    const select = $('evidence-record-select');
+    select.replaceChildren(...history.map((record, index) => {
+      const option = document.createElement('option');
+      option.value = String(index);
+      option.textContent = `${index + 1}. ${record.manifest.title} · ${statusName(record.manifest.evidence.status)}`;
+      return option;
+    }));
+    if (!history.length) select.append(new Option('No bound entries', ''));
+    select.disabled = !history.length;
+    if (history.length) select.value = String(history.length - 1);
+  }
+  $('evidence-record-select').onchange = () => {
+    if (busy) return;
+    const selected = history[Number($('evidence-record-select').value)];
+    if (!selected) return;
+    current = snapshot(selected);
+    setStatus('Bound evidence entry selected',
+      'This exports the selected historical entry, not any unbound changes in the editor.');
+    renderRecord();
+  };
   function readDraft() {
     const b = defaultBody($('case').value);
     b.title = $('title').value.trim();
@@ -525,6 +548,7 @@ if (MODE === 'manifest') {
       await verify(candidate);
       current = snapshot(candidate);
       history.push(snapshot(candidate));
+      refreshEvidenceEntries();
       head = candidate.receipt.receipt_hash;
       $('receipt-count').textContent = history.length + ' local receipts';
       $('export-history').disabled = false;
@@ -548,6 +572,7 @@ if (MODE === 'manifest') {
   $('reset').onclick = () => {
     if (busy) return;
     history = [];
+    refreshEvidenceEntries();
     head = '0'.repeat(64);
     current = null;
     $('receipt-count').textContent = '0 local receipts';

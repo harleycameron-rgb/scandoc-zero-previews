@@ -792,8 +792,8 @@ function communicate() {
     $('burn-reason').value = 'voluntary';
     render();
   };
-  $('export').onclick = () =>
-    download('scandoc-zero-communicate-demo.json', {
+  $('export').onclick = () => {
+    $('receipt').textContent = JSON.stringify({
       prototype: true,
       policy_version: VERSION,
       coupling: 'Scandoc Zero',
@@ -819,7 +819,10 @@ function communicate() {
       ledger: state.ledger,
       receipt_history: state.receipts,
       head: state.head,
-    });
+    }, null, 2);
+    $('result-title').textContent = 'Virtual ledger inspected · memory only';
+    $('result-detail').textContent = 'No file, account balance or persistent store was created. Reload resets every virtual value.';
+  };
   $('draft').onclick = () => {
     const note = $('message').value.trim();
     if (!note) {

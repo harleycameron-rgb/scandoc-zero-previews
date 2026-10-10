@@ -888,7 +888,31 @@
         <span class="k">divergence</span> <span class="v" id="v-divergence">—</span>
       </div>
       <div class="row"><span class="k">record</span> <span class="v" id="v-record">0</span></div>
-    </div>
+      <div class="head">Local contact receipts</div>
+      <div class="row"><span class="k">completed</span><span class="v" id="tap-receipt-count">0</span></div>
+      <p id="tap-receipt-status" role="status" style="max-width:210px;white-space:normal;overflow-wrap:anywhere">Touch drives moiré; release binds a local receipt.</p>
+      <details style="pointer-events:auto;max-width:210px"><summary>Latest receipt</summary><pre id="tap-receipt" style="white-space:pre-wrap;overflow-wrap:anywhere;max-height:160px;overflow:auto">No completed contact.</pre></details>
+    <!-- BEGIN BENCHMARK EVIDENCE -->
+<section class="benchmark-evidence" aria-label="Scoped benchmark and DOI evidence" data-benchmark-revision="2026-10-10-research-publication-candidate-1"
+ style="margin:8px 0;max-width:210px;pointer-events:auto;padding:16px;border:1px solid currentColor;border-radius:6px;line-height:1.5;overflow-wrap:anywhere">
+ <details><summary><strong>Benchmark evidence · InvariantTap</strong></summary>
+ <p>Contact-driven moiré, sound pulse and completed-contact receipts. No exact DOI benchmark of these new browser additions is published yet.</p>
+ <p><strong>Status:</strong> local browser/software checks, not AGI or physical validation. DOI reports below retain their own source and scope.</p>
+ <ul style="padding-left:20px"><li style="margin:10px 0"><a href="https://doi.org/10.5281/zenodo.23174093" target="_blank" rel="noopener noreferrer">10.5281/zenodo.23174093</a>
+      <span> · Invariant Drift Instrument (Moiré Pad · Sky Fused) (2026.10.06)</span><br>
+      <small>related instrument; different source pin. restricted-files. Related moiré instrument deposit. Deposited report: five tests. Source revision differs from this Tap browser import; it is not the benchmark of the new contact pulse or receipt additions.</small></li><li style="margin:10px 0"><a href="https://doi.org/10.5281/zenodo.23174076" target="_blank" rel="noopener noreferrer">10.5281/zenodo.23174076</a>
+      <span> · sentinel_dot: tamper-evident action logs for AI agents (v0.3.0)</span><br>
+      <small>related receipt method; not preview certification. restricted-files. Related action-log package. Deposited report: 157 passed, 2 deselected. Different pinned source from the copied browser writer; not a rerun, signature or anchoring claim for this preview.</small></li><li style="margin:10px 0"><a href="https://doi.org/10.5281/zenodo.23279566" target="_blank" rel="noopener noreferrer">10.5281/zenodo.23279566</a>
+      <span> · WaxTablet Paired Touch-Surface Synthetic Session Kernel 0.4.0 (0.4.0)</span><br>
+      <small>paired contract foundation; not Tap UI benchmark. open. Synthetic planar pair/session kernel. Deposited report: 39 portable tests, 322 private-suite tests, 129 optimized session/pair/motion tests and 13 separate manufactured checks. These counts do not certify the browser previews.</small></li></ul>
+ <p><small>Registry 2026-10-10-research-publication-candidate-1 · reviewed 2026-10-10.
+ The archived snapshot is immutable; later benchmark settings update the live site only.
+ Updated evidence does not silently replace a running fixture or promote the sphere.</small></p>
+
+ </details>
+</section>
+<!-- END BENCHMARK EVIDENCE -->
+</div>
 
     <div id="controls">
       <button id="btn-reset" class="danger">Reset</button>
@@ -1086,6 +1110,52 @@
       function sreject(type, reason, params) {
         return Sentinel.reject(type, reason, params).catch((e) => console.warn('sentinel_dot', e));
       }
+      // Completed contacts are explicitly receipted, even when no relocation ring fires.
+      // Raw coordinates live only during contact and are never placed in the receipt.
+      let contactDraft = null, contactReceipts = 0, latestContactReceipt = null;
+      const contactUI = (id) => document.getElementById(id);
+      function contactPulse() {
+        const ctx = Audio2.ctx;
+        if (!ctx || !Audio2.master) return;
+        const oscillator = ctx.createOscillator(), gain = ctx.createGain(), t = ctx.currentTime;
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(440, t);
+        oscillator.frequency.exponentialRampToValueAtTime(220, t + 0.075);
+        gain.gain.setValueAtTime(0.0001, t);
+        gain.gain.exponentialRampToValueAtTime(0.09, t + 0.005);
+        gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.09);
+        oscillator.connect(gain);
+        gain.connect(Audio2.master);
+        oscillator.onended = () => { oscillator.disconnect(); gain.disconnect(); };
+        oscillator.start(t);
+        oscillator.stop(t + 0.1);
+      }
+      async function bindContact(draft) {
+        const duration = Math.max(0, Math.round(performance.now() - draft.started));
+        const isTap = duration <= 250 && draft.travel <= 12;
+        contactUI('tap-receipt-status').textContent = 'Binding completed contact locally…';
+        try {
+          const entry = await Sentinel.action(isTap ? 'tap' : 'contact', {
+            duration_ms: duration,
+            movement: draft.travel <= 12 ? 'stationary' : 'moving',
+            forward_gate: true,
+            mirror_gate: mirrorOn,
+            raw_contact_retained: false,
+            output: 'moire-and-sound-pulse',
+          });
+          latestContactReceipt = JSON.parse(JSON.stringify(entry));
+          contactUI('tap-receipt-count').textContent = String(++contactReceipts);
+          contactUI('tap-receipt').textContent = JSON.stringify(entry, null, 2);
+          contactUI('tap-receipt-status').textContent =
+            (isTap ? 'Tap' : 'Contact') + ' receipt bound. Hash integrity is not proof of physical invariance.';
+        } catch (error) {
+          contactUI('tap-receipt-status').textContent = 'Receipt unavailable: ' + error.message;
+        }
+      }
+      window.TapReceipts = Object.freeze({
+        snapshot: () => ({ count: contactReceipts, latest: latestContactReceipt
+          ? JSON.parse(JSON.stringify(latestContactReceipt)) : null }),
+      });
       Sentinel.onAppend = (e) => {
         const el = document.getElementById('lb-chain');
         if (el) el.textContent = `${e.seq + 1} · ${e.entry_hash.slice(0, 8)}`;
@@ -3019,15 +3089,24 @@
    --------------------------------------------------------------------------- */
 
       canvas.addEventListener('pointerdown', (e) => {
+        if (!e.isPrimary || contactDraft) return;
         Audio2.init();
         Audio2.resume();
         canvas.setPointerCapture(e.pointerId);
         GateF.beginDrag(e.clientX, e.clientY, e.pointerId, canvas.width);
         if (mirrorOn) GateM.beginDrag(e.clientX, e.clientY, e.pointerId, canvas.width);
+        contactDraft = { pointer: e.pointerId, started: performance.now(),
+          x: e.clientX, y: e.clientY, travel: 0 };
+        contactPulse();
       });
 
       canvas.addEventListener('pointermove', (e) => {
         if (e.pointerId !== GateF.pointerId) return;
+        if (contactDraft?.pointer === e.pointerId) {
+          contactDraft.travel += Math.hypot(e.clientX - contactDraft.x, e.clientY - contactDraft.y);
+          contactDraft.x = e.clientX;
+          contactDraft.y = e.clientY;
+        }
         GateF.pushSample(e.clientX, e.clientY, canvas.width);
         if (mirrorOn) GateM.pushSample(e.clientX, e.clientY, canvas.width);
       });
@@ -3036,10 +3115,21 @@
         if (e.pointerId !== GateF.pointerId) return;
         GateF.endDrag();
         if (mirrorOn) GateM.endDrag();
+        const completed = contactDraft;
+        contactDraft = null;
+        if (completed?.pointer === e.pointerId)
+          bindContact({ started: completed.started, travel: completed.travel });
       });
 
       canvas.addEventListener('pointercancel', (e) => {
         if (e.pointerId !== GateF.pointerId) return;
+        GateF.endDrag();
+        if (mirrorOn) GateM.endDrag();
+        contactDraft = null;
+        contactUI('tap-receipt-status').textContent = 'Contact cancelled; no completed-tap receipt created.';
+      });
+      canvas.addEventListener('lostpointercapture', () => {
+        contactDraft = null;
         GateF.endDrag();
         if (mirrorOn) GateM.endDrag();
       });
