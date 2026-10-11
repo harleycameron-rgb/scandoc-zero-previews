@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Scandoc Sphere Visualiser</title>
+<style>
+body { font-family: monospace; background: #111; color: #eee; padding: 20px; }
+h2 { color: #9cf; }
+input, button { font-size: 1em; padding: 6px; margin: 4px; }
+pre { background: #222; padding: 12px; border-radius: 6px; }
+.stream { margin-bottom: 30px; }
+canvas { background: #000; border: 1px solid #333; margin-top: 20px; }
+</style>
+</head>
+<body>
+<h2>Scandoc Sphere Visualiser – Temporal & Mortality Droplet Topology</h2>
+<div class="stream">
+<h3>Stream B – Living Famous People (Birth Geometry)</h3>
+Name: <input id="bName">
+Birth Date: <input id="bDate" type="date">
+Birth Place (lat,lon): <input id="bLat" type="number" step="0.001" placeholder="lat">
+<input id="bLon" type="number" step="0.001" placeholder="lon">
+<button onclick="addBirth()">Add</button>
+<pre id="birthStream"></pre>
+</div>
+<div class="stream">
+<h3>Stream A – Famous People (Death Geometry)</h3>
+Name: <input id="dName">
+Death Date: <input id="dDate" type="date">
+Death Place (lat,lon): <input id="dLat" type="number" step="0.001" placeholder="lat">
+<input id="dLon" type="number" step="0.001" placeholder="lon">
+<button onclick="addDeath()">Add</button>
+<pre id="deathStream"></pre>
+</div>
+<div class="stream">
+<h3>Cross‑Bridge – Recently Passed</h3>
+Name: <input id="rName">
+Death Date: <input id="rDate" type="date">
+Death Place (lat,lon): <input id="rLat" type="number" step="0.001" placeholder="lat">
+<input id="rLon" type="number" step="0.001" placeholder="lon">
+<button onclick="crossBridge()">Move to Death Stream</button>
+<pre id="recentStream"></pre>
+</div>
+<canvas id="scandocSphere" width="600" height="600"></canvas>
+<script>
+function hash(str) {
+  return crypto.subtle.digest("SHA-256", new TextEncoder().encode(str))
+    .then(buf => Array.from(new Uint8Array(buf)).map(x => x.toString(16).padStart(2,"0")).join(""));
+}
+let birth = [];
+let death = [];
+let recent = [];
+const Sphere = {
+  canvas: null,
+  ctx: null,
+  angle: 0,
+  droplets: [],
+  init() {
+    this.canvas = document.getElementById("scandocSphere");
+    this.ctx = this.canvas.getContext("2d");
+    requestAnimationFrame(() => this.draw());
+  },
+  addDroplet(d) {
+    this.droplets.push(d);
+  },
+  drawSphere() {
+    const ctx = this.ctx;
+    const r = 250;
+    ctx.clearRect(0,0,600,600);
+    ctx.save();
+    ctx.translate(300,300);
+    ctx.strokeStyle = "#88aaff";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(0,0,r,0,Math.PI*2);
+    ctx.stroke();
+    ctx.restore();
+  },
+  drawDroplets() {
+    const ctx = this.ctx;
+    const r = 250;
+    const radians = Math.PI / 180;
+    const projected = [];
+    for (const d of this.droplets) {
+      if (!Number.isFinite(d.lat) || !Number.isFinite(d.lon) ||
+          d.lat < -90 || d.lat > 90 || d.lon < -180 || d.lon > 180) {
+        continue;
+      }
+      const lat = d.lat * radians;
+      const lon = d.lon * radians + this.angle;
+      const cosLat = Math.cos(lat);
+      const x = r * cosLat * Math.cos(lon);
+      const y = -r * Math.sin(lat);
+      const z = r * cosLat * Math.sin(lon);
+      if (![x, y, z].every(Number.isFinite)) continue;
+      // Positive z faces the viewer. Cull the entire back hemisphere.
+      if (z < 0) continue;
+      projected.push({ x, y, z, color: d.color || "#ffcc44" });
+    }
+    projected.sort((a, b) => a.z - b.z);
+    ctx.save();
+    ctx.translate(this.canvas.width / 2, this.canvas.height / 2);
+    ctx.beginPath();
+    ctx.arc(0, 0, r, 0, Math.PI * 2);
+    ctx.clip();
+    for (const d of projected) {
+      const depth = Math.max(0, Math.min(1, d.z / r));
+      ctx.globalAlpha = 0.65 + 0.35 * depth;
+      ctx.fillStyle = d.color;
+      const dotRadius = 4 + 2 * depth;
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, dotRadius, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.restore();
+  },
+  draw() {
+    this.angle += 0.002;
+    this.drawSphere();
+    this.drawDroplets();
+    requestAnimationFrame(() => this.draw());
+  }
+};
+function mapDroplet(person) {
+  return {
+    name: person.name,
+    lat: person.lat,
+    lon: person.lon,
+    color: person.cycle === "recently_passed" ? "#ff4444" :
+      person.cycle === "living" ? "#44ccff" : "#ffaa44"
+  };
+}
+function addToSphere(personDroplet) {
+  Sphere.addDroplet(mapDroplet(personDroplet));
+}
+async function addBirth() {
+  const name = document.getElementById("bName").value;
+  const date = document.getElementById("bDate").value;
+  const lat = parseFloat(document.getElementById("bLat").value);
+  const lon = parseFloat(document.getElementById("bLon").value);
+  const droplet = {
+    name, birth: date, lat, lon, cycle: "living",
+    commitment: await hash(name + date + lat + lon + "living")
+  };
+  birth.push(droplet);
+  addToSphere(droplet);
+  render();
+}
+async function addDeath() {
+  const name = document.getElementById("dName").value;
+  const date = document.getElementById("dDate").value;
+  const lat = parseFloat(document.getElementById("dLat").value);
+  const lon = parseFloat(document.getElementById("dLon").value);
+  const droplet = {
+    name, death: date, lat, lon, cycle: "deceased",
+    commitment: await hash(name + date + lat + lon + "deceased")
+  };
+  death.push(droplet);
+  addToSphere(droplet);
+  render();
+}
+async function crossBridge() {
+  const name = document.getElementById("rName").value;
+  const date = document.getElementById("rDate").value;
+  const lat = parseFloat(document.getElementById("rLat").value);
+  const lon = parseFloat(document.getElementById("rLon").value);
+  const droplet = {
+    name, death: date, lat, lon, cycle: "recently_passed",
+    commitment: await hash(name + date + lat + lon + "recent")
+  };
+  recent.push(droplet);
+  birth = birth.filter(x => x.name !== name);
+  death.push({
+    name, death: date, lat, lon, cycle: "deceased",
+    commitment: await hash(name + date + lat + lon + "deceased")
+  });
+  addToSphere(droplet);
+  render();
+}
+function render() {
+  document.getElementById("birthStream").textContent = JSON.stringify(birth, null, 2);
+  document.getElementById("deathStream").textContent = JSON.stringify(death, null, 2);
+  document.getElementById("recentStream").textContent = JSON.stringify(recent, null, 2);
+}
+Sphere.init();
+</script>
+</body>
+</html>
