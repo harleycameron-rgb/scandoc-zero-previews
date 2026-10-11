@@ -1,0 +1,43 @@
+name: Sphere review checks
+
+on:
+  push:
+    branches: [review/scandoc-sphere-integration]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sphere-checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  repository-checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Record tested revision
+        run: git rev-parse HEAD
+      - name: Compile scoped DOI evidence
+        run: node tools/build-evidence.cjs
+      - name: Run repository checks
+        run: node tools/check.cjs
+      - name: Compile sphere inline JavaScript syntax
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const vm = require('node:vm');
+          const html = fs.readFileSync('site/sphere/index.html', 'utf8');
+          const scripts = [...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)];
+          if (!scripts.length) throw new Error('No sphere scripts found');
+          for (const [index, match] of scripts.entries()) {
+            new vm.Script(match[1], { filename: `sphere-inline-${index}.js` });
+          }
+          console.log(`PASS: compiled ${scripts.length} inline script(s). Syntax only; no browser execution.`);
+          NODE
