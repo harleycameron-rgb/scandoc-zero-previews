@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scandoc Sphere Visualiser</title>
+<style>
+body { font-family: monospace; background: #111; color: #eee; padding: 20px; }
+h2 { color: #9cf; }
+input, button, select { font-size: 1em; padding: 6px; margin: 4px; max-width: 100%; box-sizing: border-box; }
+pre { background: #222; padding: 12px; border-radius: 6px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.stream { margin-bottom: 30px; }
+canvas { background: #000; border: 1px solid #333; margin-top: 20px; max-width: 100%; height: auto; touch-action: none; cursor: grab; }
+canvas.dragging { cursor: grabbing; }
+#appStatus { overflow-wrap: anywhere; }
+</style>
+</head>
+<body>
+<h2>Scandoc Sphere Visualiser – Temporal & Mortality Droplet Topology</h2>
+<p>Local session only. Reload clears records. Digests bind supplied content, not identity or biographical truth.</p>
+<p id="appStatus" role="status" aria-live="polite">Ready.</p>
+<div class="stream">
+<h3>Stream B – Living (Birth Geometry)</h3>
+<label>Name <input id="bName"></label>
+<label>Birth date <input id="bDate" type="date"></label>
+<label>Birth latitude <input id="bLat" type="number" min="-90" max="90" step="any"></label>
+<label>Birth longitude <input id="bLon" type="number" min="-180" max="180" step="any"></label>
+<button type="button" id="addBirth">Add living record</button>
+<pre id="birthStream">[]</pre>
+</div>
+<div class="stream">
+<h3>Stream A – Deceased (Death Geometry)</h3>
+<label>Name <input id="dName"></label>
+<label>Death date <input id="dDate" type="date"></label>
+<label>Death latitude <input id="dLat" type="number" min="-90" max="90" step="any"></label>
+<label>Death longitude <input id="dLon" type="number" min="-180" max="180" step="any"></label>
+<button type="button" id="addDeath">Add deceased record</button>
+<pre id="deathStream">[]</pre>
+</div>
+<div class="stream">
+<h3>Cross-Bridge – Recently Passed</h3>
+<label>Living record <select id="livingRecord"></select></label>
+<label>Death date <input id="rDate" type="date"></label>
+<label>Death latitude <input id="rLat" type="number" min="-90" max="90" step="any"></label>
+<label>Death longitude <input id="rLon" type="number" min="-180" max="180" step="any"></label>
+<button type="button" id="markRecent">Mark recently passed</button>
+<label>Recent record <select id="recentRecord"></select></label>
+<button type="button" id="finalizeDeath">Finalize deceased</button>
+<pre id="recentStream">[]</pre>
+</div>
+<div role="group" aria-label="Sphere rotation controls">
+<button type="button" id="rotateLeft">Rotate left 15°</button>
+<button type="button" id="rotateRight">Rotate right 15°</button>
+<button type="button" id="toggleRotation" aria-pressed="false">Pause rotation</button>
+<button type="button" id="resetRotation">Reset view</button>
+<label for="rotationSpeed">Speed (degrees/second)</label>
+<input id="rotationSpeed" type="range" min="0" max="60" step="1" value="7">
+<output id="rotationSpeedValue" for="rotationSpeed">7</output>
+<p id="rotationHelp">Drag horizontally to rotate. Dragging pauses automatic rotation. Reset pauses at the starting view.</p>
+</div>
+<canvas id="scandocSphere" width="600" height="600" aria-label="Rotating sphere droplets" aria-describedby="rotationHelp"></canvas>
+<script>
+'use strict';
+async function sha256(value) {
+  const bytes = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(value));
+  return Array.from(new Uint8Array(bytes), b => b.toString(16).padStart(2, '0')).join('');
+}
+function validate(input) {
+  if (!input || typeof input !== 'object') throw Error('Record required');
+  const name = typeof input.name === 'string' ? input.name.trim() : '';
+  if (!name) throw Error('Name required');
+  if (typeof input.date !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(input.date)) throw Error('Invalid date');
+  const date = new Date(input.date + 'T00:00:00.000Z');
+  if (!Number.isFinite(date.getTime()) || date.toISOString().slice(0, 10) !== input.date) throw Error('Invalid calendar date');
+  if (!Number.isFinite(input.lat) || input.lat < -90 || input.lat > 90) throw Error('Invalid latitude');
+  if (!Number.isFinite(input.lon) || input.lon < -180 || input.lon > 180) throw Error('Invalid longitude');
+  return { name, date: input.date, lat: Object.is(input.lat, -0) ? 0 : input.lat, lon: Object.is(input.lon, -0) ? 0 : input.lon };
+}
+function createModel(digest = sha256) {
+  const records = new Map();
+  let queue = Promise.resolve();
+  const serialize = work => {
+    const result = queue.then(work);
+    queue = result.catch(() => {});
+    return result;
+  };
+  async function bind(id, fields, cycle) {
+    const commit = await digest(JSON.stringify(['scandoc-droplet/1', id, fields.name, fields.date, fields.lat, fields.lon, cycle]));
+    if (typeof commit !== 'string' || !/^[a-f0-9]{64}$/.test(commit)) throw Error('Invalid digest');
+    const sphere_commit = await digest(JSON.stringify(['scandoc-sphere-position/1', commit, fields.lat, fields.lon]));
+    if (typeof sphere_commit !== 'string' || !/^[a-f0-9]{64}$/.test(sphere_commit)) throw Error('Invalid sphere digest');
+    return Object.freeze({ id, ...fields, cycle, commit, sphere_commit });
+  }
+  const snapshot = () => Array.from(records.values(), r => ({ ...r }));
+  return {
+    snapshot,
+    streams() {
+      const all = snapshot();
+      return Object.fromEntries(['living', 'recent', 'deceased'].map(c => [c, all.filter(r => r.cycle === c)]));
+    },
+    add(input, cycle = 'living') {
+      let fields;
+      try {
+        fields = validate(input);
+        if (!['living', 'deceased'].includes(cycle)) throw Error('Invalid initial state');
+      } catch (error) { return Promise.reject(error); }
+      return serialize(async () => {
+        const id = crypto.randomUUID();
+        const record = await bind(id, fields, cycle);
+        records.set(id, record);
+        return { ...record };
+      });
+    },
+    transition(id, input) {
+      let fields;
+      try { fields = validate(input); } catch (error) { return Promise.reject(error); }
+      return serialize(async () => {
+        const prior = records.get(id);
+        if (!prior) throw Error('Unknown record ID');
+        const cycle = { living: 'recent', recent: 'deceased' }[prior.cycle];
+        if (!cycle) throw Error('No transition from deceased');
+        if (fields.name !== prior.name) throw Error('Transition cannot rename a record');
+        if (fields.date < prior.date) throw Error('Transition date precedes prior event');
+        if (prior.cycle === 'recent' && (fields.date !== prior.date || fields.lat !== prior.lat || fields.lon !== prior.lon)) throw Error('Finalization must preserve the recent death event');
+        const record = await bind(id, fields, cycle);
+        records.set(id, record);
+        return { ...record };
+      });
+    },
+    droplets() {
+      return snapshot().map(r => ({ id: r.id, lat: r.lat, lon: r.lon, color: { living: '#44ccff', recent: '#ff4444', deceased: '#ffaa44' }[r.cycle] }));
+    }
+  };
+}
+function project(droplets, angle = 0, radius = 250) {
+  if (!Number.isFinite(angle) || !Number.isFinite(radius) || radius <= 0) throw Error('Invalid view');
+  angle %= Math.PI * 2;
+  return droplets.flatMap(d => {
+    if (!d || !Number.isFinite(d.lat) || !Number.isFinite(d.lon) || d.lat < -90 || d.lat > 90 || d.lon < -180 || d.lon > 180) return [];
+    const lat = d.lat * Math.PI / 180, lon = d.lon * Math.PI / 180 + angle;
+    const x = radius * Math.cos(lat) * Math.cos(lon), y = -radius * Math.sin(lat), z = radius * Math.cos(lat) * Math.sin(lon);
+    if (![x, y, z].every(Number.isFinite) || z < 0) return [];
+    return [{ ...d, x, y, z }];
+  }).sort((a, b) => a.z - b.z);
+}
+const model = createModel();
+const $ = id => document.getElementById(id);
+const mutationButtons = ['addBirth', 'addDeath', 'markRecent', 'finalizeDeath'];
+let busy = false;
+const Sphere = {
+  canvas: null, ctx: null, angle: 0, autoRotate: true,
+  speed: 7 * Math.PI / 180, lastFrame: null, drag: null, droplets: [],
+  init() {
+    this.canvas = $('scandocSphere');
+    this.ctx = this.canvas.getContext('2d');
+    if (!this.ctx) throw Error('Canvas rendering unavailable');
+    this.initControls();
+    requestAnimationFrame(time => this.draw(time));
+  },
+  setAutoRotate(enabled) {
+    this.autoRotate = enabled;
+    $('toggleRotation').textContent = enabled ? 'Pause rotation' : 'Resume rotation';
+    $('toggleRotation').setAttribute('aria-pressed', String(!enabled));
+  },
+  rotate(delta) {
+    const turn = Math.PI * 2;
+    this.angle = ((this.angle + delta) % turn + turn) % turn;
+  },
+  initControls() {
+    $('rotateLeft').addEventListener('click', () => { this.setAutoRotate(false); this.rotate(-Math.PI / 12); });
+    $('rotateRight').addEventListener('click', () => { this.setAutoRotate(false); this.rotate(Math.PI / 12); });
+    $('toggleRotation').addEventListener('click', () => this.setAutoRotate(!this.autoRotate));
+    $('resetRotation').addEventListener('click', () => { this.angle = 0; this.setAutoRotate(false); });
+    $('rotationSpeed').addEventListener('input', () => {
+      const value = Number($('rotationSpeed').value);
+      if (!Number.isFinite(value) || value < 0 || value > 60) return;
+      this.speed = value * Math.PI / 180;
+      $('rotationSpeedValue').textContent = String(value);
+    });
+    this.canvas.addEventListener('pointerdown', event => {
+      if (!event.isPrimary || event.button !== 0 || this.drag) return;
+      this.canvas.setPointerCapture(event.pointerId);
+      this.drag = { id: event.pointerId, x: event.clientX };
+      this.setAutoRotate(false);
+      this.canvas.classList.add('dragging');
+    });
+    this.canvas.addEventListener('pointermove', event => {
+      if (!this.drag || event.pointerId !== this.drag.id) return;
+      const width = this.canvas.getBoundingClientRect().width;
+      if (width > 0) this.rotate((event.clientX - this.drag.x) * Math.PI * 2 / width);
+      this.drag.x = event.clientX;
+    });
+    const finish = event => {
+      if (!this.drag || event.pointerId !== this.drag.id) return;
+      this.drag = null;
+      this.canvas.classList.remove('dragging');
+      if (this.canvas.hasPointerCapture(event.pointerId)) this.canvas.releasePointerCapture(event.pointerId);
+    };
+    for (const event of ['pointerup', 'pointercancel', 'lostpointercapture']) this.canvas.addEventListener(event, finish);
+  },
+  drawSphere() {
+    const ctx = this.ctx;
+    ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    ctx.save();
+    ctx.translate(this.canvas.width / 2, this.canvas.height / 2);
+    ctx.strokeStyle = '#88aaff'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.arc(0, 0, 250, 0, Math.PI * 2); ctx.stroke();
+    ctx.restore();
+  },
+  drawDroplets() {
+    const ctx = this.ctx, r = 250;
+    const points = project(this.droplets, this.angle, r);
+    ctx.save(); ctx.translate(this.canvas.width / 2, this.canvas.height / 2);
+    ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI * 2); ctx.clip();
+    for (const d of points) {
+      const depth = Math.max(0, Math.min(1, d.z / r));
+      ctx.globalAlpha = 0.65 + 0.35 * depth; ctx.fillStyle = d.color || '#ffcc44';
+      ctx.beginPath(); ctx.arc(d.x, d.y, 4 + 2 * depth, 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.restore();
+  },
+  draw(time) {
+    const elapsed = this.lastFrame === null ? 0 : Math.max(0, Math.min((time - this.lastFrame) / 1000, 0.1));
+    this.lastFrame = time;
+    if (this.autoRotate && !this.drag) this.rotate(this.speed * elapsed);
+    this.drawSphere(); this.drawDroplets();
+    requestAnimationFrame(next => this.draw(next));
+  }
+};
+function updateSelect(id, records) {
+  const select = $(id), previous = select.value;
+  select.replaceChildren();
+  if (!records.length) {
+    select.append(new Option('No records available', ''));
+  } else {
+    for (const r of records) select.append(new Option(r.name + ' | ' + r.date + ' | ' + r.id, r.id));
+    if (records.some(r => r.id === previous)) select.value = previous;
+  }
+  select.disabled = busy || !records.length;
+}
+function render() {
+  const streams = model.streams();
+  $('birthStream').textContent = JSON.stringify(streams.living, null, 2);
+  $('deathStream').textContent = JSON.stringify(streams.deceased, null, 2);
+  $('recentStream').textContent = JSON.stringify(streams.recent, null, 2);
+  Sphere.droplets = model.droplets();
+  updateSelect('livingRecord', streams.living);
+  updateSelect('recentRecord', streams.recent);
+  for (const id of mutationButtons) $(id).disabled = busy;
+  $('markRecent').disabled = busy || !streams.living.length;
+  $('finalizeDeath').disabled = busy || !streams.recent.length;
+}
+function readInput(prefix, name) {
+  const number = suffix => {
+    const value = $(prefix + suffix).value.trim();
+    return value === '' ? NaN : Number(value);
+  };
+  return { name: name === undefined ? $(prefix + 'Name').value : name, date: $(prefix + 'Date').value, lat: number('Lat'), lon: number('Lon') };
+}
+async function mutate(work) {
+  if (busy) return;
+  busy = true; render(); $('appStatus').textContent = 'Validating and hashing locally…';
+  try {
+    const record = await work();
+    $('appStatus').textContent = 'Updated ' + record.id + ' → ' + record.cycle + '. Content digest only; not verified biography.';
+  } catch (error) {
+    $('appStatus').textContent = 'Rejected: ' + error.message;
+  } finally { busy = false; render(); }
+}
+$('addBirth').addEventListener('click', () => {
+  const input = readInput('b');
+  void mutate(() => model.add(input, 'living'));
+});
+$('addDeath').addEventListener('click', () => {
+  const input = readInput('d');
+  void mutate(() => model.add(input, 'deceased'));
+});
+$('markRecent').addEventListener('click', () => {
+  const id = $('livingRecord').value;
+  const prior = model.snapshot().find(r => r.id === id);
+  if (!prior) { $('appStatus').textContent = 'Select a living record.'; return; }
+  const input = readInput('r', prior.name);
+  void mutate(() => model.transition(id, input));
+});
+$('finalizeDeath').addEventListener('click', () => {
+  const id = $('recentRecord').value;
+  const prior = model.snapshot().find(r => r.id === id);
+  if (!prior) { $('appStatus').textContent = 'Select a recent record.'; return; }
+  void mutate(() => model.transition(id, prior));
+});
+try {
+  if (!globalThis.crypto?.subtle || typeof globalThis.crypto.randomUUID !== 'function') throw Error('Secure-context Web Crypto is required. Open through HTTPS or localhost.');
+  Sphere.init(); render();
+} catch (error) {
+  $('appStatus').textContent = 'Unavailable: ' + error.message;
+  for (const id of [...mutationButtons, 'rotateLeft', 'rotateRight', 'toggleRotation', 'resetRotation', 'rotationSpeed', 'livingRecord', 'recentRecord']) $(id).disabled = true;
+}
+</script>
+</body>
+</html>
