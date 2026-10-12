@@ -28,6 +28,8 @@ let w = 1,
 document.documentElement.dataset.theme = matchMedia('(prefers-color-scheme: dark)').matches
   ? 'dark'
   : 'light';
+const observedAt = $('browser-observed');
+if (observedAt) observedAt.textContent = new Date().toISOString();
 const sub = (a, b) => a.map((v, i) => v - b[i]),
   add = (a, b) => a.map((v, i) => v + b[i]),
   norm = (a) => Math.hypot(...a),
@@ -473,7 +475,7 @@ $('verify').onclick = async () => {
       av.ok && bv.ok && linked
         ? 'Both hashes, sequences, previous heads and A→B references verify locally. No authorship or truth verified.'
         : 'Receipt validation failed.';
-    $('integrity').textContent = av.ok && bv.ok && linked ? 'Verified locally' : 'Failed';
+    $('integrity').textContent = av.ok && bv.ok && linked ? 'Chain valid locally' : 'Failed';
   } catch (error) {
     $('verify-result').textContent = 'Verification error: ' + error.message;
   } finally {

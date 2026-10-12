@@ -7,6 +7,7 @@ const { spawnSync } = require('node:child_process');
 const root = path.resolve(__dirname, '..');
 const site = path.join(root, 'site');
 const files = [];
+const { assess } = require('./page-evidence.cjs');
 
 function walk(dir) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -17,6 +18,45 @@ function walk(dir) {
 walk(site);
 require('./surface-model.test.cjs');
 require('./benchmark-registry.test.cjs');
+require('./page-evidence.test.cjs');
+
+const harnessEvidence = JSON.parse(
+  fs.readFileSync(path.join(site, 'harness/evidence.json'), 'utf8'),
+);
+const harnessHtml = fs.readFileSync(path.join(site, 'harness/index.html'));
+const checkedRevision =
+  process.env.GITHUB_SHA ||
+  spawnSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).stdout.trim();
+assert.match(checkedRevision, /^[a-f0-9]{40}$/);
+assert.deepEqual(
+  assess(
+    harnessEvidence,
+    {
+      revision: checkedRevision,
+      html_sha256: crypto.createHash('sha256').update(harnessHtml).digest('hex'),
+    },
+  ),
+  { firing: 'PENDING', deployment: 'UNVERIFIED', sixLegCompletion: 'PENDING' },
+  'Public firing, deployment and six-leg status must remain unverified without trusted sources',
+);
+const harnessPage = harnessHtml.toString('utf8');
+for (const label of [
+  'Firing: PENDING.',
+  'Deployment: UNVERIFIED.',
+  'Final six-symbol completion: PENDING.',
+  'local browser clock; observation only',
+]) {
+  assert.ok(harnessPage.includes(label), `Missing fail-closed harness evidence label: ${label}`);
+}
+const researchVerification = JSON.parse(
+  fs.readFileSync(path.join(root, 'docs/RESEARCH-VERIFICATION.json'), 'utf8'),
+);
+const recordedHarnessCheck = researchVerification.functionalChecks.find(
+  (check) => check.module === 'Harness',
+);
+assert.equal(recordedHarnessCheck.simulationIgnition, true);
+assert.equal(recordedHarnessCheck.externalFiring, false);
+assert.equal(recordedHarnessCheck.sixLegCompletion, 'pending');
 
 let links = 0;
 for (const file of files) {
@@ -112,7 +152,7 @@ async function checkSentinels() {
   b.entries[1].parameters.cycle = 99;
   assert.equal((await b.verify()).ok, false, 'Tampered receipt must fail');
   console.log(
-    `PASS: ${files.length} static assets; ${links} local routes; fixture controls; independent SHA-256 and A/B linkage; tamper rejection.`,
+    `PASS: ${files.length} static assets; ${links} local routes; fixture controls; fail-closed page evidence; independent SHA-256 and A/B linkage; tamper rejection.`,
   );
 }
 checkSentinels().catch((error) => {

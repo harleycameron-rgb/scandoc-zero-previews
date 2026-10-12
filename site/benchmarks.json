@@ -19,7 +19,7 @@
       "source_commit": "56f072bef29003b4c730e6e7cf221ff87b801362",
       "evidence_status": "published-report",
       "access": "open",
-      "scope": "Synthetic planar pair/session kernel. Deposited report: 39 portable tests, 322 private-suite tests, 129 optimized session/pair/motion tests and 13 separate manufactured checks. These counts do not certify the browser previews.",
+      "scope": "Synthetic planar pair/session kernel. The deposited report does not certify the browser previews.",
       "canonical": false
     },
     {

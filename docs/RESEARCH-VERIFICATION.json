@@ -147,10 +147,12 @@
     },
     {
       "module": "Harness",
-      "ignition": true,
-      "receiptA": true,
-      "receiptB": true,
-      "verification": true
+      "simulationIgnition": true,
+      "syntheticReceiptA": true,
+      "syntheticReceiptB": true,
+      "localReceiptIntegrityCheck": true,
+      "externalFiring": false,
+      "sixLegCompletion": "pending"
     },
     {
       "module": "Navigation",
@@ -305,7 +307,7 @@
       "hostedTapReceipt": true
     },
     {
-      "hostedHarnessReceipts": true
+      "hostedHarnessLocalSimulationReceipts": true
     }
   ],
   "scriptErrors": [],
