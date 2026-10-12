@@ -1,0 +1,25 @@
+{
+  "schema": "scandoc-zero-page-evidence/1",
+  "status": "unavailable",
+  "artifact": {
+    "repository": "harleycameron-rgb/scandoc-zero-previews",
+    "path": "harness/index.html",
+    "revision": null,
+    "html_sha256": null,
+    "built_at": null
+  },
+  "deployment": {
+    "status": "unavailable",
+    "public_url": null,
+    "succeeded_at": null,
+    "source": null
+  },
+  "firing": {
+    "status": "unavailable",
+    "event_at": null,
+    "producer": null,
+    "completed_legs": [],
+    "source": null,
+    "local_stub": false
+  }
+}

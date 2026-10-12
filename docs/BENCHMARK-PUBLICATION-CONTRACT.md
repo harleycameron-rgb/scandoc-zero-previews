@@ -4,7 +4,7 @@ The eight browser previews are research interfaces, not demonstrated AGI. The Ha
 
 ## Published foundations and related work
 
-- **Planar session foundation:** [10.5281/zenodo.23279566](https://zenodo.org/records/23279566), source `56f072bef29003b4c730e6e7cf221ff87b801362`. The Harness planar fixture uses this source revision. Deposited counts belong to the kernel/archive/private-suite scopes named in the record, not to this website.
+- **Planar session foundation:** [10.5281/zenodo.23279566](https://zenodo.org/records/23279566), source `56f072bef29003b4c730e6e7cf221ff87b801362`. The Harness planar fixture uses this source revision. Deposited counts belong to the kernel/archive scopes named in the record, not to this website.
 - **Provisional sphere episode:** [10.5281/zenodo.23270319](https://zenodo.org/records/23270319), checkpoint `38e8525e03b0955a6ea281dd98921a1b0c11bcc8`. Quarantined and non-canonical; not independent model inference, harmonic truth or the final organism.
 - **Related Sentinel method:** [10.5281/zenodo.23174076](https://zenodo.org/records/23174076). Public metadata/reported tests, restricted files. The record pins a different source from this browser writer; do not apply its test count to this preview.
 - **Related moiré instrument:** [10.5281/zenodo.23174093](https://zenodo.org/records/23174093). Public metadata/reported tests, restricted files. Different source revision from the Tap import; not a benchmark of the newly added contact receipt and pulse.
