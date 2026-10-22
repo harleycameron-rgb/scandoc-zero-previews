@@ -1,0 +1,266 @@
+{
+  "schemaVersion": "scandoc.catalogue/0.2-preview",
+  "gate": "CLOSED_UNVERIFIED",
+  "entries": [
+    {
+      "title": "Sentinel reference",
+      "module": "Core",
+      "type": "module",
+      "status": "current",
+      "summary": "Fixed reference origin T0; expression controls must not rewrite it.",
+      "evidence": "SPECIFICATION",
+      "specification": "Catalogue record; mathematical and source definitions require independent review.",
+      "provenance": "Historical SCANDOC research context; original source assets not bundled in this preview."
+    },
+    {
+      "title": "Six-face launch contract",
+      "module": "Core",
+      "type": "specification",
+      "status": "current",
+      "summary": "Tap, Surface, Gain, Habitat, Engine, Business are the six launch commitments.",
+      "evidence": "SPECIFICATION",
+      "specification": "Catalogue record; mathematical and source definitions require independent review.",
+      "provenance": "Historical SCANDOC research context; original source assets not bundled in this preview."
+    },
+    {
+      "title": "Cube to sphere transition",
+      "module": "Core",
+      "type": "specification",
+      "status": "experimental",
+      "summary": "The six-faced cube is a launch scaffold; sphere geometry is a versioned expression.",
+      "evidence": "UNVERIFIED",
+      "specification": "Catalogue record; mathematical and source definitions require independent review.",
+      "provenance": "Historical SCANDOC research context; original source assets not bundled in this preview."
+    },
+    {
+      "title": "Shared geometric expression",
+      "module": "Core",
+      "type": "module",
+      "status": "experimental",
+      "summary": "Independent projections should share one validated core state.",
+      "evidence": "UNVERIFIED",
+      "specification": "Catalogue record; mathematical and source definitions require independent review.",
+      "provenance": "Historical SCANDOC research context; original source assets not bundled in this preview."
+    },
+    {
+      "title": "InvariantTap",
+      "module": "Tap",
+      "type": "module",
+      "status": "experimental",
+      "summary": "Concave sampling-facing instrument and visual presentation.",
+      "evidence": "UNVERIFIED",
+      "specification": "Catalogue record; mathematical and source definitions require independent review.",
+      "provenance": "Historical SCANDOC research context; original source assets not bundled in this preview."
+    },
+    {
+      "title": "Invariant Surface",
+      "module": "Surface",
+      "type": "module",
+      "status": "experimental",
+      "summary": "Convex surface expression over the shared geometric state.",
+      "evidence": "UNVERIFIED",
+      "specification": "Catalogue record; mathematical and source definitions require independent review.",
+      "provenance": "Historical SCANDOC research context; original source assets not bundled in this preview."
+    },
+    {
+      "title": "Gain",
+      "module": "Gain",
+      "type": "module",
+      "status": "experimental",
+      "summary": "Six-face launch identity; projection semantics remain to be defined.",
+      "evidence": "UNVERIFIED",
+      "specification": "Catalogue record; mathematical and source definitions require independent review.",
+      "provenance": "Historical SCANDOC research context; original source assets not bundled in this preview."
+    },
+    {
+      "title": "Habitat",
+      "module": "Habitat",
+      "type": "module",
+      "status": "experimental",
+      "summary": "Six-face launch identity; projection semantics remain to be defined.",
+      "evidence": "UNVERIFIED",
+      "specification": "Catalogue record; mathematical and source definitions require independent review.",
+      "provenance": "Historical SCANDOC research context; original source assets not bundled in this preview."
+    },
+    {
+      "title": "Engine",
+      "module": "Engine",
+      "type": "module",
+      "status": "experimental",
+      "summary": "North-pole output face in the launch specification.",
+      "evidence": "UNVERIFIED",
+      "specification": "Catalogue record; mathematical and source definitions require independent review.",
+      "provenance": "Historical SCANDOC research context; original source assets not bundled in this preview."
+    },
+    {
+      "title": "Business",
+      "module": "Business",
+      "type": "module",
+      "status": "experimental",
+      "summary": "South-pole input face in the launch specification.",
+      "evidence": "UNVERIFIED",
+      "specification": "Catalogue record; mathematical and source definitions require independent review.",
+      "provenance": "Historical SCANDOC research context; original source assets not bundled in this preview."
+    },
+    {
+      "title": "Burning Orrery",
+      "module": "Orrery",
+      "type": "module",
+      "status": "experimental",
+      "summary": "Temporal depiction constrained by deterministic geometry and synthetic evidence.",
+      "evidence": "UNVERIFIED",
+      "specification": "Catalogue record; mathematical and source definitions require independent review.",
+      "provenance": "Historical SCANDOC research context; original source assets not bundled in this preview."
+    },
+    {
+      "title": "MDL convergence harness",
+      "module": "MDL",
+      "type": "module",
+      "status": "experimental",
+      "summary": "Models are mapped to common conceptual units; measure overlap, residue and explanatory retention.",
+      "evidence": "UNVERIFIED",
+      "specification": "Catalogue record; mathematical and source definitions require independent review.",
+      "provenance": "Historical SCANDOC research context; original source assets not bundled in this preview."
+    },
+    {
+      "title": "MDL overlap caveat",
+      "module": "MDL",
+      "type": "specification",
+      "status": "current",
+      "summary": "Complete representational overlap can arise from information-losing compression.",
+      "evidence": "SPECIFICATION",
+      "specification": "Catalogue record; mathematical and source definitions require independent review.",
+      "provenance": "Historical SCANDOC research context; original source assets not bundled in this preview."
+    },
+    {
+      "title": "VelocitySplat",
+      "module": "VelocitySplat",
+      "type": "module",
+      "status": "experimental",
+      "summary": "Surface-impact and drift metaphor requiring concrete operational equations.",
+      "evidence": "UNVERIFIED",
+      "specification": "Catalogue record; mathematical and source definitions require independent review.",
+      "provenance": "Historical SCANDOC research context; original source assets not bundled in this preview."
+    },
+    {
+      "title": "Foretentacle",
+      "module": "Foretentacle",
+      "type": "module",
+      "status": "experimental",
+      "summary": "Forward post-launch deconstructive expression, not a seventh launch load.",
+      "evidence": "UNVERIFIED",
+      "specification": "Catalogue record; mathematical and source definitions require independent review.",
+      "provenance": "Historical SCANDOC research context; original source assets not bundled in this preview."
+    },
+    {
+      "title": "Time-axis origin link",
+      "module": "Time Axis",
+      "type": "module",
+      "status": "experimental",
+      "summary": "Backward post-launch extension anchored to the fixed Sentinel reference.",
+      "evidence": "UNVERIFIED",
+      "specification": "Catalogue record; mathematical and source definitions require independent review.",
+      "provenance": "Historical SCANDOC research context; original source assets not bundled in this preview."
+    },
+    {
+      "title": "Scandoc Convergence Engine Diagram",
+      "module": "Images",
+      "type": "image",
+      "status": "review",
+      "summary": "Visual diagram; unsupported live-state or receipt annotations need correction.",
+      "evidence": "UNVERIFIED",
+      "specification": "Catalogue record; mathematical and source definitions require independent review.",
+      "provenance": "Historical SCANDOC research context; original source assets not bundled in this preview."
+    },
+    {
+      "title": "Cosmic Velocity Splat Data Engine",
+      "module": "Images",
+      "type": "image",
+      "status": "historical",
+      "summary": "Conceptual category-sphere visualisation; not current six-face topology.",
+      "evidence": "UNVERIFIED",
+      "specification": "Catalogue record; mathematical and source definitions require independent review.",
+      "provenance": "Historical SCANDOC research context; original source assets not bundled in this preview."
+    },
+    {
+      "title": "Invariant Engine: Modular Topology",
+      "module": "Images",
+      "type": "image",
+      "status": "review",
+      "summary": "Image awaiting provenance and technical-accuracy review.",
+      "evidence": "UNVERIFIED",
+      "specification": "Catalogue record; mathematical and source definitions require independent review.",
+      "provenance": "Historical SCANDOC research context; original source assets not bundled in this preview."
+    },
+    {
+      "title": "SCANDOC: Subject and Sphere Blueprint",
+      "module": "Images",
+      "type": "image",
+      "status": "historical",
+      "summary": "Previous module taxonomy; retain in historical archive.",
+      "evidence": "UNVERIFIED",
+      "specification": "Catalogue record; mathematical and source definitions require independent review.",
+      "provenance": "Historical SCANDOC research context; original source assets not bundled in this preview."
+    },
+    {
+      "title": "Velocity Splat: Four Cosmic Data Views",
+      "module": "Images",
+      "type": "image",
+      "status": "review",
+      "summary": "Interpretive scientific artwork awaiting review.",
+      "evidence": "UNVERIFIED",
+      "specification": "Catalogue record; mathematical and source definitions require independent review.",
+      "provenance": "Historical SCANDOC research context; original source assets not bundled in this preview."
+    },
+    {
+      "title": "Scandoc composite sealed core architecture",
+      "module": "Images",
+      "type": "image",
+      "status": "review",
+      "summary": "Earlier composite depiction requiring label/evidence checking.",
+      "evidence": "UNVERIFIED",
+      "specification": "Catalogue record; mathematical and source definitions require independent review.",
+      "provenance": "Historical SCANDOC research context; original source assets not bundled in this preview."
+    },
+    {
+      "title": "Invariant Engine: Modular Topology Map",
+      "module": "Images",
+      "type": "image",
+      "status": "review",
+      "summary": "Topology image candidate, not an authenticated proof.",
+      "evidence": "UNVERIFIED",
+      "specification": "Catalogue record; mathematical and source definitions require independent review.",
+      "provenance": "Historical SCANDOC research context; original source assets not bundled in this preview."
+    },
+    {
+      "title": "Potato triptych",
+      "module": "Triptychs",
+      "type": "triptych",
+      "status": "historical",
+      "summary": "Avant-garde subject triptych catalogue placeholder.",
+      "evidence": "UNVERIFIED",
+      "specification": "Catalogue record; mathematical and source definitions require independent review.",
+      "provenance": "Historical SCANDOC research context; original source assets not bundled in this preview."
+    },
+    {
+      "title": "Smartphone triptych",
+      "module": "Triptychs",
+      "type": "triptych",
+      "status": "historical",
+      "summary": "Avant-garde subject triptych catalogue placeholder.",
+      "evidence": "UNVERIFIED",
+      "specification": "Catalogue record; mathematical and source definitions require independent review.",
+      "provenance": "Historical SCANDOC research context; original source assets not bundled in this preview."
+    },
+    {
+      "title": "Bagpipes triptych",
+      "module": "Triptychs",
+      "type": "triptych",
+      "status": "historical",
+      "summary": "Avant-garde subject triptych catalogue placeholder.",
+      "evidence": "UNVERIFIED",
+      "specification": "Catalogue record; mathematical and source definitions require independent review.",
+      "provenance": "Historical SCANDOC research context; original source assets not bundled in this preview."
+    }
+  ]
+}
